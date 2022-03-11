@@ -1,5 +1,7 @@
 import StyledWrapper from './MultiUseSection.styles';
 import { useContext, useState } from 'react';
+import Image from 'next/image';
+import profileIcon from 'images/profile.svg';
 import UserContext from 'UserContext';
 import Button from 'components/atoms/Button/Button';
 import LogInSignUpForm from 'components/molecules/LogInSignUpForm/LogInSignUpForm';
@@ -10,16 +12,34 @@ const MultiUseSection = () => {
 
   return (
     <StyledWrapper user={user}>
-      {user ? ( // this appears only on screens bigger than 1366px
-        <Button
-          text='My account'
-          textColor='yellow'
-          backgroundColor='blue'
-          className='my-account-button'
-        />
+      {user ? ( // this appears only on bigger screens
+        <>
+          <div className='container'>
+            <div className='image-border'>
+              <div className='image-container'>
+                <Image src={profileIcon} layout='fill' alt='profile picture' />
+              </div>
+            </div>
+            <h2 className='user-name'>{user.name}</h2>
+            <p className='user-email'>{user.email}</p>
+          </div>
+          <div className='container'>
+            <h2 className='heading'>
+              <span className='primary'>Visit </span>
+              <span className='secondary'>your account </span>
+              <span className='primary'>to sell a book and more!</span>
+            </h2>
+            <Button
+              text='My account'
+              textColor='yellow'
+              backgroundColor='blue'
+              className='my-account-button'
+            />
+          </div>
+        </>
       ) : (
         <>
-          <div>
+          <div className='container'>
             <h2 className='heading'>
               {formType === 'login' ? (
                 <>
@@ -37,7 +57,7 @@ const MultiUseSection = () => {
           </div>
 
           {formType === 'login' && (
-            <div>
+            <div className='container'>
               <h2 className='heading'>
                 <span className='primary'>Don’t have an account yet? </span>
                 <span className='secondary'>Register now!</span>

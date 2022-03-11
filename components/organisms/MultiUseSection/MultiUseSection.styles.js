@@ -25,7 +25,7 @@ const StyledWrapper = styled.section`
     padding: 50px;
   }
 
-  div {
+  .container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,7 +62,8 @@ const StyledWrapper = styled.section`
       }
     }
 
-    .register-button {
+    .register-button,
+    .my-account-button {
       margin-top: 25px;
 
       @media (min-width: 768px) {
@@ -75,6 +76,53 @@ const StyledWrapper = styled.section`
 
       @media (min-width: 2560px) {
         margin-top: 30px;
+      }
+    }
+
+    .image-border {
+      width: 110px;
+      height: 110px;
+      padding: 2.5px;
+
+      background-color: ${({ theme }) => theme.color.blue};
+      border-radius: 100%;
+
+      @media (min-width: 2560px) {
+        width: 170px;
+        height: 170px;
+
+        padding: 5px;
+      }
+
+      .image-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .user-name {
+      margin-top: 15px;
+
+      font-size: ${({ theme }) => theme.fontSize.M};
+      font-family: ${({ theme }) => theme.fontFamily.primary};
+      color: ${({ theme }) => theme.color.darkGrey};
+
+      @media (min-width: 2560px) {
+        margin-top: 20px;
+        font-size: ${({ theme }) => theme.fontSize.L};
+      }
+    }
+
+    .user-email {
+      margin-top: 3px;
+
+      font-size: ${({ theme }) => theme.fontSize.S};
+      font-family: ${({ theme }) => theme.fontFamily.secondary};
+      color: ${({ theme }) => theme.color.lightGrey};
+
+      @media (min-width: 2560px) {
+        font-size: ${({ theme }) => theme.fontSize.M};
       }
     }
   }

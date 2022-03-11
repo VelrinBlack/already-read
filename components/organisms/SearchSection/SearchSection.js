@@ -9,7 +9,7 @@ import UserContext from 'UserContext';
 import Button from 'components/atoms/Button/Button';
 
 const SearchSection = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [viewportHeight, setViewportHeight] = useState(0);
 
   const handleResize = () => setViewportHeight(window.innerHeight);
@@ -34,7 +34,6 @@ const SearchSection = () => {
   return (
     <StyledWrapper viewportHeight={viewportHeight}>
       <Logo />
-
       <div className='centered-container'>
         <h1 className='heading'>
           <span className='primary'>Find any </span>
@@ -46,6 +45,7 @@ const SearchSection = () => {
         <SearchForm />
       </div>
 
+      {/* this appears only on smaller screens */}
       {user ? (
         <Button
           text='My account'
