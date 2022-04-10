@@ -31,7 +31,7 @@ const StyledWrapper = styled.section`
     align-items: center;
 
     &:nth-child(2) {
-      margin-top: 80px;
+      margin-top: 60px;
 
       @media (min-width: 1366px) {
         margin-top: 0;

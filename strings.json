@@ -1,0 +1,8 @@
+{
+  "formError": {
+    "parameterMissing": "Please fill in all fields",
+    "invalidEmail": "Please enter valid email address",
+    "invalidName": "Please enter valid name",
+    "tooShortPassword": "Please enter longer password"
+  }
+}
