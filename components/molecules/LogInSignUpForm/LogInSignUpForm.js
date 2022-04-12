@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import StyledWrapper from './LogInSignUpForm.styles';
 import Input from 'components/atoms/Input/Input';
 import Button from 'components/atoms/Button/Button';
@@ -46,7 +47,23 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
       setLoginError('');
     }
 
-    // login api request
+    axios
+      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`, {
+        email: loginEmail,
+        password: loginPassword,
+      })
+      .then((res) => {
+        if (res.data.message === strings.apiResponseMessage.authenticatedSuccessfully) {
+          // authenticated successfully
+        }
+      })
+      .catch((err) => {
+        if (err.response.data.message === strings.apiResponseMessage.invalidCredentials) {
+          setLoginError('Invalid credentials');
+        } else {
+          setLoginError('Something went wrong');
+        }
+      });
   };
 
   const handleRegisterSubmit = () => {
@@ -74,7 +91,24 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
       setRegisterError('');
     }
 
-    // register api request
+    axios
+      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/register`, {
+        name: registerName,
+        email: registerEmail,
+        password: registerPassword,
+      })
+      .then((res) => {
+        if (res.data.message === strings.apiResponseMessage.createdSuccessfully) {
+          // user created successfully
+        }
+      })
+      .catch((err) => {
+        if (err.response.data.message === strings.apiResponseMessage.alreadyExists) {
+          setRegisterError('User already exists');
+        } else {
+          setRegisterError('Something went wrong');
+        }
+      });
   };
 
   return (

@@ -4,5 +4,12 @@
     "invalidEmail": "Please enter valid email address",
     "invalidName": "Please enter valid name",
     "tooShortPassword": "Please enter longer password"
+  },
+  "apiResponseMessage": {
+    "invalidParameters": "Invalid parameters",
+    "alreadyExists": "Already exists",
+    "createdSuccessfully": "Created successfully",
+    "invalidCredentials": "Invalid credentials",
+    "authenticatedSuccessfully": "Authenticated successfully"
   }
 }
