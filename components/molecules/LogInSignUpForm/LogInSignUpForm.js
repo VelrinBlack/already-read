@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import StyledWrapper from './LogInSignUpForm.styles';
 import Input from 'components/atoms/Input/Input';
 import Button from 'components/atoms/Button/Button';
 import strings from 'strings.json';
+import UserContext from 'UserContext';
 
 const LogInSignUpForm = ({ formType, setFormType }) => {
   const [loginEmail, setLoginEmail] = useState('');
@@ -14,6 +15,8 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerError, setRegisterError] = useState('');
+
+  const { setUser } = useContext(UserContext);
 
   useEffect(() => {
     setLoginEmail('');
@@ -32,6 +35,18 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       );
+  };
+
+  const saveUser = ({ name, email, password }) => {
+    setUser({
+      name,
+      email,
+      password,
+    });
+
+    localStorage.setItem('user_name', name);
+    localStorage.setItem('user_email', email);
+    localStorage.setItem('user_password', password);
   };
 
   const handleLoginSubmit = () => {
@@ -54,11 +69,11 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
       })
       .then((res) => {
         if (res.data.message === strings.apiResponseMessage.authenticatedSuccessfully) {
-          // authenticated successfully
+          saveUser(res.data);
         }
       })
       .catch((err) => {
-        if (err.response.data.message === strings.apiResponseMessage.invalidCredentials) {
+        if (err.response?.data.message === strings.apiResponseMessage.invalidCredentials) {
           setLoginError('Invalid credentials');
         } else {
           setLoginError('Something went wrong');
@@ -99,11 +114,11 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
       })
       .then((res) => {
         if (res.data.message === strings.apiResponseMessage.createdSuccessfully) {
-          // user created successfully
+          saveUser(res.data);
         }
       })
       .catch((err) => {
-        if (err.response.data.message === strings.apiResponseMessage.alreadyExists) {
+        if (err.response?.data.message === strings.apiResponseMessage.alreadyExists) {
           setRegisterError('User already exists');
         } else {
           setRegisterError('Something went wrong');
