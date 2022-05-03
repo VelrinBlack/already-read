@@ -1,35 +1,45 @@
 import styled from 'styled-components';
 import Logo from 'components/atoms/Logo/Logo';
 import SearchBoxSection from 'components/organisms/SearchBoxSection/SearchBoxSection';
+import MultiUseSection from 'components/organisms/MultiUseSection/MultiUseSection';
 
 const StyledWrapper = styled.div`
-  background-color: ${({ theme }) => theme.color.darkGrey};
+  height: 100%;
+  display: flex;
 
-  .logo-container {
-    width: 100%;
-    padding-top: 30px;
-    padding-bottom: 15px;
+  main {
+    flex: 1;
+    background-color: ${({ theme }) => theme.color.darkGrey};
 
-    display: flex;
-    justify-content: center;
+    .logo-container {
+      width: 100%;
+      padding-top: 30px;
+      padding-bottom: 15px;
 
-    @media (min-width: 768px) {
-      padding-bottom: 0;
-    }
+      display: flex;
+      justify-content: center;
 
-    @media (min-width: 2560px) {
-      padding-top: 50px;
+      @media (min-width: 768px) {
+        padding-bottom: 0;
+      }
+
+      @media (min-width: 2560px) {
+        padding-top: 50px;
+      }
     }
   }
 `;
 
 const Search = () => (
   <StyledWrapper>
-    <div className='logo-container'>
-      <Logo />
-    </div>
+    <main>
+      <div className='logo-container'>
+        <Logo />
+      </div>
 
-    <SearchBoxSection />
+      <SearchBoxSection />
+    </main>
+    <MultiUseSection />
   </StyledWrapper>
 );
 

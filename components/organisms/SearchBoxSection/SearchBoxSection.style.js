@@ -31,8 +31,11 @@ const StyledWrapper = styled.div`
       grid-gap: 10px;
     }
 
-    @media (min-width: 2560px) {
+    @media (min-width: 1366px) {
       width: 740px;
+    }
+
+    @media (min-width: 2560px) {
       grid-template-columns: repeat(2, 1fr) 55px;
       grid-template-rows: 55px;
       grid-gap: 15px;
