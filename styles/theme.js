@@ -1,5 +1,6 @@
 const theme = {
   fontSize: {
+    XXXS: '10px',
     XXS: '12px',
     XS: '14px',
     S: '18px',

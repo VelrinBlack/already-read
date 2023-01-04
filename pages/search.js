@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import Logo from 'components/atoms/Logo/Logo';
 import SearchBoxSection from 'components/organisms/SearchBoxSection/SearchBoxSection';
 import MultiUseSection from 'components/organisms/MultiUseSection/MultiUseSection';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import BookList from 'components/organisms/BookList/BookList';
 
 const StyledWrapper = styled.div`
   height: 100%;
@@ -30,17 +33,45 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const Search = () => (
-  <StyledWrapper>
-    <main>
-      <div className='logo-container'>
-        <Logo />
-      </div>
+const Search = () => {
+  const router = useRouter();
+  const { title, ISBN } = router.query;
 
-      <SearchBoxSection />
-    </main>
-    <MultiUseSection />
-  </StyledWrapper>
-);
+  const [books, setBooks] = useState([
+    {
+      title: 'The Chronicks of Narnia',
+      yearPublished: '2006',
+      ISBN: '978-1-4028-9462-6',
+      price: 32,
+    },
+    {
+      title: 'The Chronicks of Narnia',
+      yearPublished: '2006',
+      ISBN: '978-1-4028-9462-6',
+      price: 32,
+    },
+    {
+      title: 'The Chronicks of Narnia',
+      yearPublished: '2006',
+      ISBN: '978-1-4028-9462-6',
+      price: 32,
+    },
+  ]);
+
+  return (
+    <StyledWrapper>
+      <main>
+        <div className='logo-container'>
+          <Logo />
+        </div>
+
+        <SearchBoxSection />
+
+        <BookList books={books} />
+      </main>
+      <MultiUseSection />
+    </StyledWrapper>
+  );
+};
 
 export default Search;
