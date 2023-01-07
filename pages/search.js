@@ -51,6 +51,10 @@ const Search = () => {
   const router = useRouter();
   const { title, ISBN } = router.query;
 
+  const [books, setBooks] = useState([]);
+  const [error, setError] = useState('');
+
+  // loading books
   useEffect(() => {
     if (title || ISBN) {
       axios
@@ -71,9 +75,6 @@ const Search = () => {
         });
     }
   }, [title, ISBN]);
-
-  const [books, setBooks] = useState([]);
-  const [error, setError] = useState('');
 
   return (
     <StyledWrapper>

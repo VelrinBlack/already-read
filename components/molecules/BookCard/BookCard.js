@@ -3,7 +3,7 @@ import Image from 'next/image';
 import likeImg from 'images/like.svg';
 import { useState, useEffect } from 'react';
 
-const BookCard = ({ data: { title, author, price, ISBN, yearPublished, state } }) => {
+const BookCard = ({ data: { title, author, price, ISBN, yearPublished, state, imageName } }) => {
   const [viewportWidth, setViewportWidth] = useState(0);
 
   const handleResize = () => setViewportWidth(window.innerWidth);
@@ -19,7 +19,13 @@ const BookCard = ({ data: { title, author, price, ISBN, yearPublished, state } }
 
   return (
     <StyledWrapper>
-      <div className='image-container'></div>
+      <div className='image-container'>
+        <Image
+          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/book/image/${imageName}`}
+          alt='cover image'
+          layout='fill'
+        />
+      </div>
       <div className='content-container'>
         <h2 className='title'>{title}</h2>
 

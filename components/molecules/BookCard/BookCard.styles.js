@@ -28,22 +28,29 @@ const StyledWrapper = styled.div`
   }
 
   .image-container {
-    background-color: white;
+    position: relative;
 
-    width: 75px;
-    border-radius: ${({ theme }) => theme.borderRadius};
+    width: 85px;
     margin: -2px 0 -2px -2px;
 
-    @media (min-width: 414px) {
-      width: 85px;
+    border-top-left-radius: ${({ theme }) => theme.borderRadius};
+    border-bottom-left-radius: ${({ theme }) => theme.borderRadius};
+    overflow: hidden;
+
+    img {
+      object-fit: cover;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 414px) {
       width: 90px;
     }
 
+    @media (min-width: 768px) {
+      width: 110px;
+    }
+
     @media (min-width: 1920px) {
-      width: 100px;
+      width: 125px;
     }
   }
 
