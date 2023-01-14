@@ -101,7 +101,7 @@ const StyledWrapper = styled.div`
 
 const Search = () => {
   const router = useRouter();
-  const { title, ISBN } = router.query;
+  const { title, isbn } = router.query;
 
   const [books, setBooks] = useState([]);
   const [error, setError] = useState('');
@@ -110,11 +110,15 @@ const Search = () => {
 
   // loading books
   useEffect(() => {
-    if (title || ISBN) {
+    if (title || isbn) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/book/getFiltered?${
-            title ? 'title=' + title : 'ISBN=' + ISBN
+          `${
+            title && isbn
+              ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/book/getFiltered?title=${title}&isbn=${isbn}`
+              : title
+              ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/book/getFiltered?title=${title}`
+              : `${process.env.NEXT_PUBLIC_BACKEND_URL}/book/getFiltered?isbn=${isbn}`
           }`,
         )
         .then((res) => {
@@ -128,7 +132,7 @@ const Search = () => {
           }
         });
     }
-  }, [title, ISBN]);
+  }, [title, isbn]);
 
   return (
     <StyledWrapper>

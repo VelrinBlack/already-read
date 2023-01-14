@@ -15,6 +15,10 @@ const StyledWrapper = styled.form`
     flex-direction: column;
     align-items: center;
 
+    input {
+      border: ${({ error }) => (error ? '2px solid #da0000' : 'none')};
+    }
+
     @media (min-width: 414px) {
       width: 360px;
     }
