@@ -12,6 +12,7 @@ import { useContext } from 'react';
 import UserContext from 'UserContext';
 
 const StyledWrapper = styled.div`
+  min-height: 100%;
   display: flex;
   background-color: ${({ theme }) => theme.color.darkGrey};
 
@@ -57,10 +58,11 @@ const StyledWrapper = styled.div`
     }
 
     .button-container {
-      position: sticky;
+      position: fixed;
       bottom: 10px;
 
-      margin: 0 30px;
+      width: 100%;
+      padding: 0 30px;
 
       box-shadow: 0 0 10px 10px #31393c;
 
