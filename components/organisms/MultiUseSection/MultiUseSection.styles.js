@@ -7,6 +7,8 @@ const StyledWrapper = styled.section`
 
   background-color: ${({ theme }) => theme.color.yellow};
 
+  z-index: 2;
+
   @media (min-width: 768px) {
     padding: 60px 80px;
   }
@@ -30,11 +32,27 @@ const StyledWrapper = styled.section`
     flex-direction: column;
     align-items: center;
 
+    @media (min-width: 1366px) {
+      position: sticky;
+      top: 30px;
+    }
+
+    @media (min-width: 2560px) {
+      top: 50px;
+    }
+
     &:nth-child(2) {
       margin-top: 60px;
 
       @media (min-width: 1366px) {
         margin-top: 0;
+
+        position: sticky;
+        bottom: 30px;
+      }
+
+      @media (min-width: 2560px) {
+        bottom: 50px;
       }
     }
 

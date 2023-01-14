@@ -7,29 +7,40 @@ import { useState, useEffect } from 'react';
 import BookList from 'components/organisms/BookList/BookList';
 import axios from 'axios';
 import strings from 'strings';
+import Button from 'components/atoms/Button/Button';
+import { useContext } from 'react';
+import UserContext from 'UserContext';
 
 const StyledWrapper = styled.div`
-  height: 100%;
   display: flex;
+  background-color: ${({ theme }) => theme.color.darkGrey};
 
   main {
     flex: 1;
-    background-color: ${({ theme }) => theme.color.darkGrey};
 
-    .logo-container {
-      width: 100%;
-      padding-top: 30px;
-      padding-bottom: 15px;
+    .top-section {
+      position: sticky;
+      top: 0;
 
-      display: flex;
-      justify-content: center;
+      background-color: ${({ theme }) => theme.color.darkGrey};
 
-      @media (min-width: 768px) {
-        padding-bottom: 0;
-      }
+      z-index: 1;
 
-      @media (min-width: 2560px) {
-        padding-top: 50px;
+      .logo-container {
+        width: 100%;
+        padding-top: 30px;
+        padding-bottom: 15px;
+
+        display: flex;
+        justify-content: center;
+
+        @media (min-width: 768px) {
+          padding-bottom: 0;
+        }
+
+        @media (min-width: 2560px) {
+          padding-top: 50px;
+        }
       }
     }
 
@@ -44,6 +55,45 @@ const StyledWrapper = styled.div`
         font-size: ${({ theme }) => theme.fontSize.S};
       }
     }
+
+    .button-container {
+      position: sticky;
+      bottom: 10px;
+
+      margin: 0 30px;
+
+      box-shadow: 0 0 10px 10px #31393c;
+
+      @media (min-width: 768px) {
+        width: 100%;
+        margin: 0;
+
+        display: flex;
+        justify-content: center;
+      }
+
+      @media (min-width: 1366px) {
+        visibility: hidden;
+      }
+
+      .my-account-button {
+        @media (min-width: 768px) {
+          width: 600px;
+        }
+
+        @media (min-width: 1366px) {
+          width: 740px;
+        }
+      }
+    }
+  }
+
+  section {
+    display: none;
+
+    @media (min-width: 1366px) {
+      display: flex;
+    }
   }
 `;
 
@@ -53,6 +103,8 @@ const Search = () => {
 
   const [books, setBooks] = useState([]);
   const [error, setError] = useState('');
+
+  const { user } = useContext(UserContext);
 
   // loading books
   useEffect(() => {
@@ -79,13 +131,35 @@ const Search = () => {
   return (
     <StyledWrapper>
       <main>
-        <div className='logo-container'>
-          <Logo />
+        <div className='top-section'>
+          <div className='logo-container'>
+            <Logo />
+          </div>
+
+          <SearchBoxSection />
         </div>
 
-        <SearchBoxSection />
-
         {error ? <p className='error'>{error}</p> : <BookList books={books} />}
+
+        {user ? (
+          <div className='button-container'>
+            <Button
+              text='My account'
+              textColor='yellow'
+              backgroundColor='blue'
+              className='my-account-button'
+            />
+          </div>
+        ) : (
+          <div className='button-container'>
+            <Button
+              text='Log in'
+              textColor='yellow'
+              backgroundColor='blue'
+              className='my-account-button'
+            />
+          </div>
+        )}
       </main>
       <MultiUseSection />
     </StyledWrapper>
