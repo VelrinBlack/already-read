@@ -41,21 +41,13 @@ const StyledWrapper = styled.div`
       grid-gap: 15px;
     }
 
-    input,
+    input {
+      border: ${({ error }) => (error ? '2px solid #da0000' : 'none')};
+    }
+
     button {
       border: none;
       border-radius: ${({ theme }) => theme.borderRadius};
-    }
-
-    input {
-      text-align: center;
-      font-size: ${({ theme }) => theme.fontSize.XS};
-      font-family: ${({ theme }) => theme.fontFamily.primary};
-      outline: none;
-
-      @media (min-width: 2560px) {
-        font-size: ${({ theme }) => theme.fontSize.S};
-      }
     }
 
     button {
