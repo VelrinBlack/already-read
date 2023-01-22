@@ -10,6 +10,7 @@ import strings from 'strings';
 import Button from 'components/atoms/Button/Button';
 import { useContext } from 'react';
 import UserContext from 'UserContext';
+import Link from 'next/link';
 
 const StyledWrapper = styled.div`
   min-height: 100%;
@@ -158,12 +159,14 @@ const Search = () => {
           </div>
         ) : (
           <div className='button-container'>
-            <Button
-              text='Log in'
-              textColor='yellow'
-              backgroundColor='blue'
-              className='my-account-button'
-            />
+            <Link href='/login'>
+              <Button
+                text='Log in'
+                textColor='yellow'
+                backgroundColor='blue'
+                className='my-account-button'
+              />
+            </Link>
           </div>
         )}
       </main>
