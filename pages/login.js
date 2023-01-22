@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import LogInSignUpForm from 'components/molecules/LogInSignUpForm/LogInSignUpForm';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Button from 'components/atoms/Button/Button';
 import Logo from 'components/atoms/Logo/Logo';
+import UserContext from 'UserContext';
+import { useRouter } from 'next/router';
 
 const StyledWrapper = styled.div`
   height: 100%;
@@ -92,8 +94,16 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const Home = () => {
+const Login = () => {
+  const router = useRouter();
+  const { user, setUser } = useContext(UserContext);
   const [formType, setFormType] = useState('login');
+
+  useEffect(() => {
+    if (user) {
+      router.push('/');
+    }
+  }, [user]);
 
   return (
     <StyledWrapper>
@@ -134,4 +144,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Login;
