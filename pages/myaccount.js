@@ -2,12 +2,9 @@ import styled from 'styled-components';
 import Logo from 'components/atoms/Logo/Logo';
 import Image from 'next/image';
 import hamburgerIcon from 'images/hamburger.svg';
-import profileIcon from 'images/profile.svg';
-import Input from 'components/atoms/Input/Input';
-import { useState, useContext, useEffect } from 'react';
-import UserContext from 'UserContext';
-import { useRouter } from 'next/router';
-import Button from 'components/atoms/Button/Button';
+import GeneralSettingsForm from 'components/organisms/GeneralSettingsForm/GeneralSettingsForm';
+import BackIcon from 'images/back.svg';
+import Link from 'next/link';
 
 const StyledWrapper = styled.div`
   min-height: 100%;
@@ -15,7 +12,11 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  .top-section {
+  @media (min-width: 1366px) {
+    flex-direction: row;
+  }
+
+  .first-section {
     position: sticky;
     top: 0;
 
@@ -27,13 +28,32 @@ const StyledWrapper = styled.div`
 
     z-index: 1;
 
+    @media (min-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media (min-width: 1366px) {
+      width: 200px;
+    }
+    @media (min-width: 2560px) {
+      width: 255px;
+    }
+
     .logo-container {
-      width: 100%;
-      padding-top: 30px;
+      padding-top: 25px;
       padding-bottom: 15px;
 
       display: flex;
       justify-content: center;
+
+      @media (min-width: 1366px) {
+        width: fit-content;
+      }
+      @media (min-width: 2560px) {
+        padding-top: 35px;
+      }
     }
 
     .activation-button {
@@ -50,6 +70,14 @@ const StyledWrapper = styled.div`
       background-color: ${({ theme }) => theme.color.yellow};
 
       cursor: pointer;
+
+      @media (min-width: 768px) {
+        width: 500px;
+      }
+
+      @media (min-width: 1366px) {
+        display: none;
+      }
 
       .image-container {
         width: 100%;
@@ -69,97 +97,133 @@ const StyledWrapper = styled.div`
     padding-top: 40px;
     background-color: ${({ theme }) => theme.color.darkGrey};
 
+    @media (min-width: 1366px) {
+      justify-content: center;
+      padding: 0;
+    }
+
     .section-title {
       font-family: ${({ theme }) => theme.fontFamily.primary};
       font-size: ${({ theme }) => theme.fontSize.M};
       color: ${({ theme }) => theme.color.white};
+
+      @media (min-width: 1366px) {
+        display: none;
+      }
+    }
+  }
+
+  nav {
+    display: none;
+
+    width: 200px;
+    padding: 45px 40px 0 0;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    background-color: ${({ theme }) => theme.color.darkGrey};
+
+    @media (min-width: 1366px) {
+      display: flex;
     }
 
-    .change-image-button {
-      position: relative;
+    @media (min-width: 2560px) {
+      width: 255px;
+      padding: 50px 50px 0 0;
+    }
 
-      width: 100px;
-      height: 100px;
-      margin-top: 30px;
+    ul {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
 
-      background-color: ${({ theme }) => theme.color.darkGrey};
-      box-shadow: 0 0 15px ${({ theme }) => theme.color.lightGrey};
-      border-radius: 100%;
+      li {
+        list-style-type: none;
+        text-align: end;
+        color: ${({ theme }) => theme.color.white};
+        font-family: ${({ theme }) => theme.fontFamily.primary};
+        font-size: ${({ theme }) => theme.fontSize.XS};
+        margin-top: 15px;
+
+        &:first-of-type {
+          margin-top: 0;
+        }
+
+        &.active {
+          font-size: ${({ theme }) => theme.fontSize.M};
+          font-weight: bold;
+
+          &:first-of-type {
+            margin-bottom: 5px;
+          }
+
+          &:nth-of-type(2),
+          &:nth-of-type(3) {
+            margin: 20px 0 5px 0;
+          }
+
+          &:nth-of-type(4) {
+            margin-top: 20px;
+          }
+
+          @media (min-width: 2560px) {
+            font-size: ${({ theme }) => theme.fontSize.L};
+          }
+        }
+
+        @media (min-width: 2560px) {
+          font-size: ${({ theme }) => theme.fontSize.S};
+        }
+      }
+    }
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: 20px;
+      margin-bottom: 45px;
+      background-color: transparent;
       border: none;
 
       cursor: pointer;
 
-      &:hover {
-        opacity: 0.7;
-      }
-    }
-
-    form {
-      width: 100%;
-      padding: 15px 30px;
-
-      label {
-        font-family: ${({ theme }) => theme.fontFamily.primary};
-        font-size: ${({ theme }) => theme.fontSize.XXS};
-        color: ${({ theme }) => theme.color.white};
+      @media (min-width: 2560px) {
+        height: 30px;
+        margin-bottom: 50px;
       }
 
-      input {
-        margin-top: 5px;
+      .image-container {
+        position: relative;
+        height: 15px;
+        width: 15px;
+        margin-bottom: 1px;
 
-        background-color: transparent;
-        border: 2px solid ${({ theme }) => theme.color.yellow};
-
-        color: ${({ theme }) => theme.color.white};
-
-        &#name,
-        &#old-password {
-          margin-bottom: 12px;
-        }
-
-        &#email {
-          margin-bottom: 50px;
+        @media (min-width: 2560px) {
+          height: 20px;
+          width: 20px;
+          margin-bottom: 3px;
         }
       }
 
-      .button-container {
-        position: fixed;
-        bottom: 10px;
-        left: 0;
+      p {
+        margin-left: 8px;
+        color: ${({ theme }) => theme.color.white};
+        font-size: ${({ theme }) => theme.fontSize.XS};
 
-        width: 100%;
-        padding: 0 30px;
-
-        box-shadow: 0 0 10px 10px #31393c;
+        @media (min-width: 2560px) {
+          font-size: ${({ theme }) => theme.fontSize.S};
+        }
       }
     }
   }
 `;
 
 const MyAccount = () => {
-  const router = useRouter();
-  const { user, setUser } = useContext(UserContext);
-
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-
-  useEffect(() => {
-    const userName = localStorage.getItem('user_name');
-    const userEmail = localStorage.getItem('user_email');
-
-    if (userName && userEmail) {
-      setName(userName);
-      setEmail(userEmail);
-    } else {
-      router.push('/');
-    }
-  }, [user]);
-
   return (
     <StyledWrapper>
-      <div className='top-section'>
+      <div className='first-section'>
         <div className='logo-container'>
           <Logo />
         </div>
@@ -170,49 +234,29 @@ const MyAccount = () => {
           </div>
         </button>
       </div>
+
       <main>
         <h2 className='section-title'>General</h2>
-        <button className='change-image-button'>
-          <Image src={profileIcon} layout='fill' alt='profile icon' />
-        </button>
 
-        <form>
-          <label htmlFor='name'>Name:</label>
-          <Input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            id='name'
-          />
-          <label htmlFor='email'>Email:</label>
-          <Input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            id='email'
-          />
-
-          <label htmlFor='old-password'>Old password:</label>
-          <Input
-            value={oldPassword}
-            onChange={(e) => setOldPassword(e.target.value)}
-            id='old-password'
-          />
-          <label htmlFor='new-password'>New password:</label>
-          <Input
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            id='new-password'
-          />
-
-          <div className='button-container'>
-            <Button
-              text='Save changes'
-              textColor='yellow'
-              backgroundColor='blue'
-              className='save-button'
-            />
-          </div>
-        </form>
+        <GeneralSettingsForm />
       </main>
+
+      <nav>
+        <ul>
+          <li className='active'>General</li>
+          <li>My books</li>
+          <li>Messages</li>
+          <li>Favourites</li>
+        </ul>
+        <Link href='/' passHref>
+          <button>
+            <div className='image-container'>
+              <Image src={BackIcon} alt='back' layout='fill' className='backIcon' />
+            </div>
+            <p>Home page</p>
+          </button>
+        </Link>
+      </nav>
     </StyledWrapper>
   );
 };

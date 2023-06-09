@@ -33,7 +33,7 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
     return str
       .toLowerCase()
       .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       );
   };
 
@@ -68,18 +68,12 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
         password: loginPassword,
       })
       .then((res) => {
-        if (
-          res.data.message ===
-          strings.apiResponseMessage.authenticatedSuccessfully
-        ) {
+        if (res.data.message === strings.apiResponseMessage.authenticatedSuccessfully) {
           saveUser(res.data);
         }
       })
       .catch((err) => {
-        if (
-          err.response?.data.message ===
-          strings.apiResponseMessage.invalidCredentials
-        ) {
+        if (err.response?.data.message === strings.apiResponseMessage.invalidCredentials) {
           setLoginError('Invalid credentials');
         } else {
           setLoginError('Something went wrong');
@@ -119,17 +113,12 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
         password: registerPassword,
       })
       .then((res) => {
-        if (
-          res.data.message === strings.apiResponseMessage.createdSuccessfully
-        ) {
+        if (res.data.message === strings.apiResponseMessage.createdSuccessfully) {
           saveUser(res.data);
         }
       })
       .catch((err) => {
-        if (
-          err.response?.data.message ===
-          strings.apiResponseMessage.alreadyExists
-        ) {
+        if (err.response?.data.message === strings.apiResponseMessage.alreadyExists) {
           setRegisterError('User already exists');
         } else {
           setRegisterError('Something went wrong');
