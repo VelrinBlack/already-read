@@ -7,6 +7,7 @@ import scrollDownIcon from 'images/scroll-down.svg';
 import { useContext } from 'react';
 import UserContext from 'UserContext';
 import Button from 'components/atoms/Button/Button';
+import Link from 'next/link';
 
 const SearchSection = () => {
   const { user } = useContext(UserContext);
@@ -47,12 +48,14 @@ const SearchSection = () => {
 
       {/* this appears only on smaller screens */}
       {user ? (
-        <Button
-          text='My account'
-          textColor='yellow'
-          backgroundColor='blue'
-          className='my-account-button'
-        />
+        <Link href='/myaccount' passHref>
+          <Button
+            text='My account'
+            textColor='yellow'
+            backgroundColor='blue'
+            className='my-account-button'
+          />
+        </Link>
       ) : (
         <button className='scroll-down' onClick={scrollDown}>
           <div className='image-container'>

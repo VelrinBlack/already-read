@@ -1,6 +1,9 @@
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const StyledWrapper = styled.div`
+  cursor: pointer;
+
   span {
     font-size: ${({ theme }) => theme.fontSize.S};
 
@@ -21,10 +24,12 @@ const StyledWrapper = styled.div`
 `;
 
 const Logo = (...props) => (
-  <StyledWrapper className='logo' {...props}>
-    <span>Already</span>
-    <span>Read</span>
-  </StyledWrapper>
+  <Link href='/' passHref>
+    <StyledWrapper className='logo' {...props}>
+      <span>Already</span>
+      <span>Read</span>
+    </StyledWrapper>
+  </Link>
 );
 
 export default Logo;

@@ -5,6 +5,7 @@ import profileIcon from 'images/profile.svg';
 import UserContext from 'UserContext';
 import Button from 'components/atoms/Button/Button';
 import LogInSignUpForm from 'components/molecules/LogInSignUpForm/LogInSignUpForm';
+import Link from 'next/link';
 
 const MultiUseSection = () => {
   const { user, setUser } = useContext(UserContext);
@@ -29,12 +30,14 @@ const MultiUseSection = () => {
               <span className='secondary'>your account </span>
               <span className='primary'>to sell a book and more!</span>
             </h2>
-            <Button
-              text='My account'
-              textColor='yellow'
-              backgroundColor='blue'
-              className='my-account-button'
-            />
+            <Link href='/myaccount' passHref>
+              <Button
+                text='My account'
+                textColor='yellow'
+                backgroundColor='blue'
+                className='my-account-button'
+              />
+            </Link>
           </div>
         </>
       ) : (

@@ -35,7 +35,7 @@ const StyledWrapper = styled.div`
     }
 
     @media (min-width: 1366px) {
-      width: 200px;
+      width: 202px;
     }
     @media (min-width: 2560px) {
       width: 255px;
@@ -116,7 +116,7 @@ const StyledWrapper = styled.div`
   nav {
     display: none;
 
-    width: 200px;
+    width: 202px;
     padding: 45px 40px 0 0;
     flex-direction: column;
     justify-content: space-between;
