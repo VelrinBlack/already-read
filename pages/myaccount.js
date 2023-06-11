@@ -5,6 +5,8 @@ import hamburgerIcon from 'images/hamburger.svg';
 import GeneralSettingsForm from 'components/organisms/GeneralSettingsForm/GeneralSettingsForm';
 import BackIcon from 'images/back.svg';
 import Link from 'next/link';
+import Decoration1 from 'images/decoration1.svg';
+import Decoration2 from 'images/decoration2.svg';
 
 const StyledWrapper = styled.div`
   min-height: 100%;
@@ -85,6 +87,26 @@ const StyledWrapper = styled.div`
         position: relative;
       }
     }
+
+    .decoration1-container {
+      display: none;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      align-items: flex-end;
+
+      width: 200px;
+      aspect-ratio: 226 / 167;
+
+      @media (min-width: 1366px) {
+        display: flex;
+      }
+
+      @media (min-width: 2560px) {
+        width: 350px;
+      }
+    }
   }
 
   main {
@@ -132,15 +154,37 @@ const StyledWrapper = styled.div`
       padding: 50px 50px 0 0;
     }
 
+    .decoration2-container {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      justify-content: flex-end;
+
+      width: 230px;
+      aspect-ratio: 188 / 214;
+
+      @media (min-width: 1366px) {
+        display: flex;
+      }
+
+      @media (min-width: 2560px) {
+        width: 340px;
+      }
+    }
+
     ul {
       display: flex;
       flex-direction: column;
       padding: 0;
 
+      z-index: 1;
+
       li {
         list-style-type: none;
         text-align: end;
-        color: ${({ theme }) => theme.color.white};
+        color: ${({ theme }) => theme.color.black};
         font-family: ${({ theme }) => theme.fontFamily.primary};
         font-size: ${({ theme }) => theme.fontSize.XS};
         margin-top: 15px;
@@ -233,6 +277,10 @@ const MyAccount = () => {
             <Image src={hamburgerIcon} alt='search' layout='fill' />
           </div>
         </button>
+
+        <div className='decoration1-container'>
+          <Image src={Decoration1} alt='' layout='fill' />
+        </div>
       </div>
 
       <main>
@@ -242,6 +290,9 @@ const MyAccount = () => {
       </main>
 
       <nav>
+        <div className='decoration2-container'>
+          <Image src={Decoration2} alt='' layout='fill' />
+        </div>
         <ul>
           <li className='active'>General</li>
           <li>My books</li>
