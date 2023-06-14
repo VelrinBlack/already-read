@@ -163,6 +163,44 @@ const StyledWrapper = styled.form`
       box-shadow: none;
     }
   }
+
+  .error,
+  .success {
+    width: 100%;
+    height: 45px;
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: linear-gradient(to left, #ff0000, #ed0000, #da0000, #c90000, #b70000);
+    background-size: 200% 200%;
+    border-radius: ${({ theme }) => theme.borderRadius};
+
+    color: ${({ theme }) => theme.color.white};
+    animation: backgroundMovement 1s infinite alternate;
+
+    @keyframes backgroundMovement {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: 100% 100%;
+      }
+    }
+
+    @media (min-width: 1366px) {
+      grid-column: 1 / 3;
+    }
+    @media (min-width: 2560px) {
+      height: 55px;
+    }
+
+    &.success {
+      background-image: linear-gradient(90deg, rgba(91, 125, 30, 1) 0%, rgba(122, 164, 27, 1) 100%);
+    }
+  }
 `;
 
 export default StyledWrapper;

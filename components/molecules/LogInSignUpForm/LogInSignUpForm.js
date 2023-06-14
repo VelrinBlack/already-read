@@ -37,16 +37,16 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
       );
   };
 
-  const saveUser = ({ name, email, password }) => {
+  const saveUser = ({ name, email, token }) => {
     setUser({
       name,
       email,
-      password,
+      token,
     });
 
     localStorage.setItem('user_name', name);
     localStorage.setItem('user_email', email);
-    localStorage.setItem('user_password', password);
+    localStorage.setItem('user_token', token);
   };
 
   const handleLoginSubmit = () => {

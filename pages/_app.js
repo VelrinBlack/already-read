@@ -10,13 +10,13 @@ const App = ({ Component, pageProps }) => {
   useEffect(() => {
     const name = localStorage.getItem('user_name');
     const email = localStorage.getItem('user_email');
-    const password = localStorage.getItem('user_password');
+    const token = localStorage.getItem('user_token');
 
-    if (name && email && password) {
+    if (name && email && token) {
       setUser({
         name,
         email,
-        password,
+        token,
       });
     }
   }, []);
