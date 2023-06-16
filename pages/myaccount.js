@@ -7,6 +7,8 @@ import BackIcon from 'images/back.svg';
 import Link from 'next/link';
 import Decoration1 from 'images/decoration1.svg';
 import Decoration2 from 'images/decoration2.svg';
+import { useState } from 'react';
+import CloseIcon from 'images/close.svg';
 
 const StyledWrapper = styled.div`
   min-height: 100%;
@@ -58,7 +60,7 @@ const StyledWrapper = styled.div`
       }
     }
 
-    .activation-button {
+    .menu-activation-button {
       width: 100%;
       height: 45px;
       margin-top: 15px;
@@ -85,6 +87,85 @@ const StyledWrapper = styled.div`
         width: 100%;
         height: 70%;
         position: relative;
+      }
+    }
+
+    .menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background-color: ${({ theme }) => theme.color.darkGrey};
+
+      ul {
+        padding: 0;
+
+        li {
+          list-style-type: none;
+          text-align: center;
+          color: ${({ theme }) => theme.color.white};
+          font-family: ${({ theme }) => theme.fontFamily.primary};
+          font-size: ${({ theme }) => theme.fontSize.XS};
+          padding-top: 20px;
+
+          &:first-of-type {
+            padding-top: 0;
+          }
+
+          &.active {
+            font-size: ${({ theme }) => theme.fontSize.M};
+            font-weight: bold;
+
+            &:first-of-type {
+              padding-bottom: 5px;
+            }
+
+            &:nth-of-type(2),
+            &:nth-of-type(3) {
+              padding: 25px 0 5px 0;
+            }
+
+            &:nth-of-type(4) {
+              padding-top: 25px;
+            }
+          }
+        }
+      }
+
+      .close-button {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+
+        width: 50px;
+        height: 50px;
+        padding: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: transparent;
+        border: none;
+
+        cursor: pointer;
+
+        .image-container {
+          position: relative;
+          width: 80%;
+          height: 80%;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
     }
 
@@ -135,7 +216,7 @@ const StyledWrapper = styled.div`
     }
   }
 
-  nav {
+  .desktop-navigation {
     display: none;
 
     width: 202px;
@@ -265,6 +346,8 @@ const StyledWrapper = styled.div`
 `;
 
 const MyAccount = () => {
+  const [menuActive, setMenuActive] = useState(false);
+
   return (
     <StyledWrapper>
       <div className='first-section'>
@@ -272,11 +355,29 @@ const MyAccount = () => {
           <Logo />
         </div>
 
-        <button className='activation-button'>
+        <button className='menu-activation-button' onClick={() => setMenuActive(true)}>
           <div className='image-container'>
             <Image src={hamburgerIcon} alt='search' layout='fill' />
           </div>
         </button>
+
+        {menuActive && (
+          <div className='menu'>
+            <nav className='mobile-navigation'>
+              <ul>
+                <li className='active'>General</li>
+                <li>My books</li>
+                <li>Messages</li>
+                <li>Favourites</li>
+              </ul>
+            </nav>
+            <button className='close-button' onClick={() => setMenuActive(false)}>
+              <div className='image-container'>
+                <Image src={CloseIcon} alt='' layout='fill' />
+              </div>
+            </button>
+          </div>
+        )}
 
         <div className='decoration1-container'>
           <Image src={Decoration1} alt='' layout='fill' />
@@ -289,7 +390,7 @@ const MyAccount = () => {
         <GeneralSettingsForm />
       </main>
 
-      <nav>
+      <nav className='desktop-navigation'>
         <div className='decoration2-container'>
           <Image src={Decoration2} alt='' layout='fill' />
         </div>
