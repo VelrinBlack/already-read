@@ -20,6 +20,11 @@ const StyledWrapper = styled.div`
     margin-top: 40px;
     z-index: 1;
 
+    @media (min-width: 768px) {
+      width: 250px;
+      margin-top: 60px;
+    }
+
     img {
       border-radius: ${({ theme }) => theme.borderRadius};
     }
@@ -37,6 +42,10 @@ const StyledWrapper = styled.div`
 
     background-color: ${({ theme }) => theme.color.yellow};
 
+    @media (min-width: 768px) {
+      height: 300px;
+    }
+
     .title {
       width: 250px;
       margin-top: 125px;
@@ -45,6 +54,11 @@ const StyledWrapper = styled.div`
       font-size: ${({ theme }) => theme.fontSize.M};
       color: ${({ theme }) => theme.color.darkGrey};
       font-weight: bold;
+
+      @media (min-width: 768px) {
+        width: 400px;
+        font-size: ${({ theme }) => theme.fontSize.L};
+      }
     }
 
     .info-container {
@@ -59,12 +73,20 @@ const StyledWrapper = styled.div`
 
       transform: translateY(50%);
 
+      @media (min-width: 768px) {
+        height: 50px;
+      }
+
       .price-container,
       .condition-container {
         width: calc((100% - 200px) / 2);
 
         background-color: ${({ theme }) => theme.color.white};
         color: ${({ theme }) => theme.color.darkGrey};
+
+        @media (min-width: 768px) {
+          width: 120px;
+        }
       }
 
       .price-container {
@@ -79,6 +101,10 @@ const StyledWrapper = styled.div`
           font-size: ${({ theme }) => theme.fontSize.S};
           font-family: ${({ theme }) => theme.fontFamily.primary};
           font-weight: bold;
+
+          @media (min-width: 768px) {
+            font-size: ${({ theme }) => theme.fontSize.M};
+          }
         }
       }
 
@@ -95,6 +121,11 @@ const StyledWrapper = styled.div`
           margin-left: 8px;
           font-size: ${({ theme }) => theme.fontSize.XXXS};
           font-family: ${({ theme }) => theme.fontFamily.primary};
+
+          @media (min-width: 768px) {
+            font-size: ${({ theme }) => theme.fontSize.XXS};
+            margin-left: 12px;
+          }
 
           span:nth-child(2) {
             font-weight: bold;
@@ -113,6 +144,12 @@ const StyledWrapper = styled.div`
     font-family: ${({ theme }) => theme.fontFamily.primary};
     font-size: ${({ theme }) => theme.fontSize.XXS};
     line-height: 150%;
+
+    @media (min-width: 768px) {
+      bottom: 20px;
+      margin: 0 80px;
+      font-size: ${({ theme }) => theme.fontSize.XS};
+    }
   }
 
   .second-background {
@@ -120,10 +157,19 @@ const StyledWrapper = styled.div`
     background-color: ${({ theme }) => theme.color.yellow};
     margin-bottom: 10px;
 
+    @media (min-width: 768px) {
+      margin: 40px 0 20px 0;
+    }
+
     .contact-info {
       margin: 35px 30px 0 30px;
 
       display: flex;
+
+      @media (min-width: 768px) {
+        margin: 35px 80px 0 80px;
+        justify-content: center;
+      }
 
       .profile-image-container {
         position: relative;
@@ -162,6 +208,11 @@ const StyledWrapper = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+
+      @media (min-width: 768px) {
+        margin: 25px 80px 35px 80px;
+        width: calc(100% - 160px);
+      }
 
       span {
         margin-left: 5px;
