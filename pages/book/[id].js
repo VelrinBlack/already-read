@@ -218,7 +218,7 @@ const Book = () => {
           backgroundColor='yellow'
           borderColor='blue'
           textColor='blue'
-          text={
+          content={
             <>
               <Image src={phoneIcon} alt='' />
               <span>+10 123 456 789</span>

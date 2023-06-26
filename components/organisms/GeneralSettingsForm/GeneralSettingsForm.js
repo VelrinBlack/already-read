@@ -152,7 +152,7 @@ const GeneralSettingsForm = () => {
       <div className='button-container'>
         <Button
           type='submit'
-          text='Save changes'
+          content='Save changes'
           textColor='white'
           backgroundColor='blue'
           className='save-button'

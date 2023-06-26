@@ -23,14 +23,7 @@ const StyledWrapper = styled.button`
   }
 `;
 
-const Button = ({
-  text,
-  type = 'text',
-  backgroundColor,
-  borderColor,
-  textColor,
-  ...props
-}) => (
+const Button = ({ content, type = 'text', backgroundColor, borderColor, textColor, ...props }) => (
   <StyledWrapper
     type={type}
     backgroundColor={backgroundColor}
@@ -38,7 +31,7 @@ const Button = ({
     textColor={textColor}
     {...props}
   >
-    {text}
+    {content}
   </StyledWrapper>
 );
 

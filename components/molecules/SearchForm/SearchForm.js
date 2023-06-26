@@ -46,7 +46,7 @@ const SearchForm = () => {
           placeholder='ISBN number'
         />
       </div>
-      <Button text='Search' textColor='white' borderColor='yellow' />
+      <Button content='Search' textColor='white' borderColor='yellow' />
     </StyledWrapper>
   );
 };

@@ -131,7 +131,7 @@ const Login = () => {
               <span className='secondary'>Register now!</span>
             </h2>
             <Button
-              text="Let's get started!"
+              content="Let's get started!"
               textColor='yellow'
               backgroundColor='blue'
               className='register-button'

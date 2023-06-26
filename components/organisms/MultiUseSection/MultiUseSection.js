@@ -32,7 +32,7 @@ const MultiUseSection = () => {
             </h2>
             <Link href='/myaccount' passHref>
               <Button
-                text='My account'
+                content='My account'
                 textColor='yellow'
                 backgroundColor='blue'
                 className='my-account-button'
@@ -66,7 +66,7 @@ const MultiUseSection = () => {
                 <span className='secondary'>Register now!</span>
               </h2>
               <Button
-                text="Let's get started!"
+                content="Let's get started!"
                 textColor='yellow'
                 backgroundColor='blue'
                 className='register-button'

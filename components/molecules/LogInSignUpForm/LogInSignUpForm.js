@@ -143,7 +143,7 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
             onChange={({ target }) => setLoginPassword(target.value)}
           />
           <Button
-            text='Log in'
+            content='Log in'
             borderColor='blue'
             textColor='blue'
             className='submit'
@@ -176,7 +176,7 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
             onChange={({ target }) => setRegisterPassword(target.value)}
           />
           <Button
-            text='Register'
+            content='Register'
             borderColor='blue'
             textColor='blue'
             className='submit'

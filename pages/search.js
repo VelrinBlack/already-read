@@ -151,7 +151,7 @@ const Search = () => {
         {user ? (
           <div className='button-container'>
             <Button
-              text='My account'
+              content='My account'
               textColor='yellow'
               backgroundColor='blue'
               className='my-account-button'
@@ -161,7 +161,7 @@ const Search = () => {
           <div className='button-container'>
             <Link href='/login'>
               <Button
-                text='Log in'
+                content='Log in'
                 textColor='yellow'
                 backgroundColor='blue'
                 className='my-account-button'

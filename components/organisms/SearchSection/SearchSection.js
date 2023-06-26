@@ -50,7 +50,7 @@ const SearchSection = () => {
       {user ? (
         <Link href='/myaccount' passHref>
           <Button
-            text='My account'
+            content='My account'
             textColor='yellow'
             backgroundColor='blue'
             className='my-account-button'
