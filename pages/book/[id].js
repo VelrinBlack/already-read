@@ -107,7 +107,7 @@ const StyledWrapper = styled.div`
   .description {
     position: relative;
     bottom: 40px;
-    margin: 0 20px;
+    margin: 0 30px;
 
     color: ${({ theme }) => theme.color.white};
     font-family: ${({ theme }) => theme.fontFamily.primary};
@@ -121,7 +121,7 @@ const StyledWrapper = styled.div`
     margin-bottom: 10px;
 
     .contact-info {
-      margin: 35px 20px 0 20px;
+      margin: 35px 30px 0 30px;
 
       display: flex;
 
@@ -156,8 +156,8 @@ const StyledWrapper = styled.div`
     }
 
     .phone-button {
-      margin: 25px 20px 35px 20px;
-      width: calc(100% - 40px);
+      margin: 25px 30px 35px 30px;
+      width: calc(100% - 60px);
 
       display: flex;
       justify-content: center;
