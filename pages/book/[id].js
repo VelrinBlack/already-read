@@ -15,6 +15,34 @@ const StyledWrapper = styled.div`
 
   background-color: ${({ theme }) => theme.color.darkGrey};
 
+  @media (min-width: 1366px) {
+    display: grid;
+    grid-template-columns: 800px 1fr;
+    grid-template-rows: 1fr 150px;
+    height: 100%;
+    padding: 0;
+
+    .logo {
+      grid-row: 1 / 2;
+      grid-column: 1 / 2;
+      align-self: self-start;
+      margin: 40px 0 0 50px;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    grid-template-columns: 1200px 1fr;
+  }
+
+  @media (min-width: 2560px) {
+    grid-template-columns: 1450px 1fr;
+    grid-template-rows: 1fr 200px;
+
+    .logo {
+      margin: 50px 0 0 60px;
+    }
+  }
+
   .book-cover-container {
     width: 200px;
     margin-top: 40px;
@@ -23,6 +51,23 @@ const StyledWrapper = styled.div`
     @media (min-width: 768px) {
       width: 250px;
       margin-top: 60px;
+    }
+
+    @media (min-width: 1366px) {
+      grid-row: 1 / 2;
+      grid-column: 1 / 2;
+      align-self: self-start;
+      margin: 153px 0 0 50px;
+      width: 300px;
+    }
+
+    @media (min-width: 1920px) {
+      width: 450px;
+    }
+
+    @media (min-width: 2560px) {
+      width: 600px;
+      margin: 211px 0 0 80px;
     }
 
     img {
@@ -46,6 +91,34 @@ const StyledWrapper = styled.div`
       height: 300px;
     }
 
+    @media (min-width: 1366px) {
+      grid-row: 1 / 2;
+      grid-column: 1 / 2;
+      align-self: self-start;
+      bottom: 0;
+      margin-top: 103px;
+      height: 350px;
+
+      border-top-right-radius: ${({ theme }) => theme.borderRadius};
+      border-bottom-right-radius: ${({ theme }) => theme.borderRadius};
+
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 75px 50px 0 425px;
+    }
+
+    @media (min-width: 1920px) {
+      height: 400px;
+      padding: 75px 50px 0 575px;
+    }
+
+    @media (min-width: 2560px) {
+      height: 550px;
+      padding: 115px 80px 0 795px;
+      margin-top: 131px;
+    }
+
     .title {
       width: 250px;
       margin-top: 125px;
@@ -58,6 +131,38 @@ const StyledWrapper = styled.div`
       @media (min-width: 768px) {
         width: 400px;
         font-size: ${({ theme }) => theme.fontSize.L};
+      }
+
+      @media (min-width: 1366px) {
+        position: relative;
+        margin: 0;
+        text-align: start;
+        z-index: 1;
+        width: 100%;
+
+        &::before {
+          content: '';
+          display: block;
+          position: absolute;
+          left: -25px;
+          top: -25px;
+          width: 90px;
+          height: 90px;
+          background-color: ${({ theme }) => theme.color.white};
+          border-radius: ${({ theme }) => theme.borderRadius};
+          z-index: -1;
+        }
+      }
+
+      @media (min-width: 2560px) {
+        font-size: ${({ theme }) => theme.fontSize.XL};
+
+        &::before {
+          left: -35px;
+          top: -35px;
+          width: 120px;
+          height: 120px;
+        }
       }
     }
 
@@ -77,6 +182,18 @@ const StyledWrapper = styled.div`
         height: 50px;
       }
 
+      @media (min-width: 1366px) {
+        position: static;
+        flex-direction: column;
+        height: auto;
+        transform: none;
+        margin-top: 30px;
+      }
+
+      @media (min-width: 2560px) {
+        margin-top: 50px;
+      }
+
       .price-container,
       .condition-container {
         width: calc((100% - 200px) / 2);
@@ -86,6 +203,11 @@ const StyledWrapper = styled.div`
 
         @media (min-width: 768px) {
           width: 120px;
+        }
+
+        @media (min-width: 1366px) {
+          width: fit-content;
+          background-color: transparent;
         }
       }
 
@@ -105,6 +227,24 @@ const StyledWrapper = styled.div`
           @media (min-width: 768px) {
             font-size: ${({ theme }) => theme.fontSize.M};
           }
+
+          @media (min-width: 1366px) {
+            font-size: ${({ theme }) => theme.fontSize.S};
+
+            &::before {
+              content: 'Price: ';
+              font-size: ${({ theme }) => theme.fontSize.XS};
+              font-weight: normal;
+            }
+          }
+
+          @media (min-width: 2560px) {
+            font-size: ${({ theme }) => theme.fontSize.M};
+
+            &::before {
+              font-size: ${({ theme }) => theme.fontSize.S};
+            }
+          }
         }
       }
 
@@ -114,6 +254,10 @@ const StyledWrapper = styled.div`
 
         border-top-left-radius: ${({ theme }) => theme.borderRadius};
         border-bottom-left-radius: ${({ theme }) => theme.borderRadius};
+
+        @media (min-width: 1366px) {
+          margin-top: 3px;
+        }
 
         .condition {
           display: flex;
@@ -125,6 +269,27 @@ const StyledWrapper = styled.div`
           @media (min-width: 768px) {
             font-size: ${({ theme }) => theme.fontSize.XXS};
             margin-left: 12px;
+          }
+
+          @media (min-width: 1366px) {
+            display: block;
+            margin: 0;
+
+            span:first-child {
+              font-size: ${({ theme }) => theme.fontSize.XS};
+            }
+            span:nth-child(2) {
+              font-size: ${({ theme }) => theme.fontSize.S};
+            }
+          }
+
+          @media (min-width: 2560px) {
+            span:first-child {
+              font-size: ${({ theme }) => theme.fontSize.S};
+            }
+            span:nth-child(2) {
+              font-size: ${({ theme }) => theme.fontSize.M};
+            }
           }
 
           span:nth-child(2) {
@@ -150,6 +315,20 @@ const StyledWrapper = styled.div`
       margin: 0 80px;
       font-size: ${({ theme }) => theme.fontSize.XS};
     }
+
+    @media (min-width: 1366px) {
+      grid-row: 1 / 2;
+      grid-column: 2 / 3;
+      align-self: self-start;
+      bottom: 0;
+      margin: 153px 50px 0 50px;
+    }
+
+    @media (min-width: 2560px) {
+      margin: 211px 80px 0 80px;
+      font-size: ${({ theme }) => theme.fontSize.S};
+      max-width: 1400px;
+    }
   }
 
   .second-background {
@@ -159,6 +338,10 @@ const StyledWrapper = styled.div`
 
     @media (min-width: 768px) {
       margin: 40px 0 20px 0;
+    }
+
+    @media (min-width: 1366px) {
+      display: none;
     }
 
     .contact-info {
@@ -219,6 +402,74 @@ const StyledWrapper = styled.div`
       }
     }
   }
+
+  .desktop-seller-info {
+    display: none;
+
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+    align-self: self-start;
+    justify-self: self-end;
+
+    height: 100px;
+    margin-right: 50px;
+
+    @media (min-width: 1366px) {
+      display: flex;
+    }
+
+    @media (min-width: 2560px) {
+      height: 140px;
+      margin-right: 80px;
+    }
+
+    .text-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-bottom: 5px;
+
+      text-align: end;
+      color: ${({ theme }) => theme.color.white};
+      font-family: ${({ theme }) => theme.fontFamily.primary};
+
+      @media (min-width: 2560px) {
+        padding-bottom: 10px;
+      }
+
+      .name {
+        font-size: ${({ theme }) => theme.fontSize.L};
+        font-weight: bold;
+
+        @media (min-width: 2560px) {
+          font-size: ${({ theme }) => theme.fontSize.XL};
+        }
+      }
+
+      .email,
+      .phone {
+        font-size: ${({ theme }) => theme.fontSize.XS};
+        margin-top: 5px;
+
+        @media (min-width: 2560px) {
+          font-size: ${({ theme }) => theme.fontSize.S};
+          margin-top: 10px;
+        }
+      }
+    }
+
+    .profile-image-container {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin-left: 25px;
+
+      @media (min-width: 2560px) {
+        width: 140px;
+        height: 140px;
+      }
+    }
+  }
 `;
 
 const Book = () => {
@@ -229,14 +480,14 @@ const Book = () => {
         <Image src={bookCover} alt='book cover' />
       </div>
       <div className='first-background'>
-        <h2 className='title'>The Chronicks of Narnia</h2>
+        <h2 className='title'>The Chronicles of Narnia</h2>
         <div className='info-container'>
           <div className='price-container'>
             <p className='price'>$ 32</p>
           </div>
           <div className='condition-container'>
             <p className='condition'>
-              <span>Condition:</span>
+              <span>Condition: </span>
               <span>Used</span>
             </p>
           </div>
@@ -276,6 +527,18 @@ const Book = () => {
             </>
           }
         />
+      </div>
+
+      {/* appears only on bigger screens (minimum 1366px) */}
+      <div className='desktop-seller-info'>
+        <div className='text-container'>
+          <h2 className='name'>John Doe</h2>
+          <p className='email'>johndoe@myemail.com</p>
+          <p className='phone'>+10 123 456 789</p>
+        </div>
+        <div className='profile-image-container'>
+          <Image src={profileImage} alt='' layout='fill' />
+        </div>
       </div>
     </StyledWrapper>
   );
