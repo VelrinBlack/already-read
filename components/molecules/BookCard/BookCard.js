@@ -3,7 +3,7 @@ import Image from 'next/image';
 import likeImg from 'images/like.svg';
 import { useState, useEffect } from 'react';
 
-const BookCard = ({ data: { title, author, price, ISBN, yearPublished, state, imageName } }) => {
+const BookCard = ({ data: { title, price, ISBN, condition, imageName } }) => {
   const [viewportWidth, setViewportWidth] = useState(0);
 
   const handleResize = () => setViewportWidth(window.innerWidth);
@@ -30,7 +30,7 @@ const BookCard = ({ data: { title, author, price, ISBN, yearPublished, state, im
         <h2 className='title'>{title}</h2>
 
         <div className='middle-container'>
-          <p className='year-published'>Year published: {yearPublished}</p>
+          <p className='condition'>Condition: {condition}</p>
           <p className='isbn'>ISBN: {ISBN}</p>
         </div>
 
