@@ -2,8 +2,9 @@ import StyledWrapper from './BookCard.styles';
 import Image from 'next/image';
 import likeImg from 'images/like.svg';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
-const BookCard = ({ data: { title, price, ISBN, condition, imageName } }) => {
+const BookCard = ({ data: { title, price, ISBN, condition, imageName, _id } }) => {
   const [viewportWidth, setViewportWidth] = useState(0);
 
   const handleResize = () => setViewportWidth(window.innerWidth);
@@ -19,15 +20,19 @@ const BookCard = ({ data: { title, price, ISBN, condition, imageName } }) => {
 
   return (
     <StyledWrapper>
-      <div className='image-container'>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/book/image/${imageName}`}
-          alt='cover image'
-          layout='fill'
-        />
-      </div>
+      <Link href={`/book/${_id}`} passHref>
+        <div className='image-container'>
+          <Image
+            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/book/image/${imageName}`}
+            alt='cover image'
+            layout='fill'
+          />
+        </div>
+      </Link>
       <div className='content-container'>
-        <h2 className='title'>{title}</h2>
+        <Link href={`/book/${_id}`} passHref>
+          <h2 className='title'>{title}</h2>
+        </Link>
 
         <div className='middle-container'>
           <p className='condition'>Condition: {condition}</p>

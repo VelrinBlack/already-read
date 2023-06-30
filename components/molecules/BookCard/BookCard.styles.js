@@ -36,6 +36,7 @@ const StyledWrapper = styled.div`
     border-top-left-radius: ${({ theme }) => theme.borderRadius};
     border-bottom-left-radius: ${({ theme }) => theme.borderRadius};
     overflow: hidden;
+    cursor: pointer;
 
     img {
       object-fit: cover;
@@ -64,6 +65,7 @@ const StyledWrapper = styled.div`
       font-family: ${({ theme }) => theme.fontFamily.primary};
       font-weight: bold;
       color: ${({ theme }) => theme.color.white};
+      cursor: pointer;
 
       @media (min-width: 768px) {
         margin: 20px 0 0 20px;
