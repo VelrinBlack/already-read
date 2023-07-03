@@ -5,6 +5,9 @@ import bookCover from 'images/book_cover.webp';
 import profileImage from 'images/profile.svg';
 import Button from 'components/atoms/Button/Button';
 import phoneIcon from 'images/phone.svg';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 const StyledWrapper = styled.div`
   padding-top: 40px;
@@ -248,39 +251,6 @@ const StyledWrapper = styled.div`
         }
       }
 
-      .favourite-button {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-
-        width: fit-content;
-        height: 100%;
-        padding: 0 15px;
-        font-size: ${({ theme }) => theme.fontSize.XXXS};
-
-        @media (min-width: 768px) {
-          font-size: ${({ theme }) => theme.fontSize.XS};
-          padding: 0 25px;
-        }
-
-        @media (min-width: 1366px) {
-          position: initial;
-          transform: none;
-
-          height: 45px;
-          margin-top: 25px;
-          background-color: ${({ theme }) => theme.color.yellow};
-          border-color: ${({ theme }) => theme.color.darkGrey};
-          color: ${({ theme }) => theme.color.darkGrey};
-        }
-
-        @media (min-width: 2560px) {
-          height: 55px;
-          font-size: ${({ theme }) => theme.fontSize.S};
-          margin-top: 40px;
-        }
-      }
-
       .condition-container {
         display: flex;
         align-items: center;
@@ -329,6 +299,39 @@ const StyledWrapper = styled.div`
             font-weight: bold;
           }
         }
+      }
+    }
+
+    .favourite-button {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: fit-content;
+      height: 100%;
+      padding: 0 15px;
+      font-size: ${({ theme }) => theme.fontSize.XXXS};
+
+      @media (min-width: 768px) {
+        font-size: ${({ theme }) => theme.fontSize.XS};
+        padding: 0 25px;
+      }
+
+      @media (min-width: 1366px) {
+        position: initial;
+        transform: none;
+
+        height: 45px;
+        margin-top: 25px;
+        background-color: ${({ theme }) => theme.color.yellow};
+        border-color: ${({ theme }) => theme.color.darkGrey};
+        color: ${({ theme }) => theme.color.darkGrey};
+      }
+
+      @media (min-width: 2560px) {
+        height: 55px;
+        font-size: ${({ theme }) => theme.fontSize.S};
+        margin-top: 40px;
       }
     }
   }
@@ -506,6 +509,32 @@ const StyledWrapper = styled.div`
 `;
 
 const Book = () => {
+  const [title, setTitle] = useState('Loading...');
+  const [price, setPrice] = useState('...');
+  const [condition, setCondition] = useState('...');
+  const [sellerName, setSellerName] = useState('...');
+  const [sellerEmail, setSellerEmail] = useState('Loading seller info...');
+
+  const router = useRouter();
+  const { id: bookID } = router.query;
+
+  useEffect(() => {
+    if (bookID) {
+      axios
+        .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/book/getOne?id=${bookID}`)
+        .then((res) => {
+          setTitle(res.data.book.title);
+          setPrice(res.data.book.price);
+          setCondition(res.data.book.condition);
+          setSellerName(res.data.book.seller.name);
+          setSellerEmail(res.data.book.seller.email);
+        })
+        .catch(() => {
+          router.push('/');
+        });
+    }
+  }, [bookID, router]);
+
   return (
     <StyledWrapper>
       <Logo />
@@ -513,16 +542,16 @@ const Book = () => {
         <Image src={bookCover} alt='book cover' />
       </div>
       <div className='first-background'>
-        <h2 className='title'>The Chronicles of Narnia</h2>
+        <h2 className='title'>{title}</h2>
         <div className='info-container'>
           <div className='price-container'>
-            <p className='price'>$ 32</p>
+            <p className='price'>$ {price}</p>
           </div>
 
           <div className='condition-container'>
             <p className='condition'>
               <span>Condition: </span>
-              <span>Used</span>
+              <span>{condition}</span>
             </p>
           </div>
           <Button
@@ -552,8 +581,8 @@ const Book = () => {
             <Image src={profileImage} alt='' layout='fill' />
           </div>
           <div className='text-container'>
-            <h2 className='name'>John Doe</h2>
-            <p className='email'>johndoe@myemail.com</p>
+            <h2 className='name'>{sellerName}</h2>
+            <p className='email'>{sellerEmail}</p>
           </div>
         </div>
         <Button
@@ -573,8 +602,8 @@ const Book = () => {
       {/* appears only on bigger screens (minimum 1366px) */}
       <div className='desktop-seller-info'>
         <div className='text-container'>
-          <h2 className='name'>John Doe</h2>
-          <p className='email'>johndoe@myemail.com</p>
+          <h2 className='name'>{sellerName}</h2>
+          <p className='email'>{sellerEmail}</p>
           <p className='phone'>+10 123 456 789</p>
         </div>
         <div className='profile-image-container'>
