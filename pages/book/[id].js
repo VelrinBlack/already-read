@@ -248,6 +248,39 @@ const StyledWrapper = styled.div`
         }
       }
 
+      .favourite-button {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: fit-content;
+        height: 100%;
+        padding: 0 15px;
+        font-size: ${({ theme }) => theme.fontSize.XXXS};
+
+        @media (min-width: 768px) {
+          font-size: ${({ theme }) => theme.fontSize.XS};
+          padding: 0 25px;
+        }
+
+        @media (min-width: 1366px) {
+          position: initial;
+          transform: none;
+
+          height: 45px;
+          margin-top: 25px;
+          background-color: ${({ theme }) => theme.color.yellow};
+          border-color: ${({ theme }) => theme.color.darkGrey};
+          color: ${({ theme }) => theme.color.darkGrey};
+        }
+
+        @media (min-width: 2560px) {
+          height: 55px;
+          font-size: ${({ theme }) => theme.fontSize.S};
+          margin-top: 40px;
+        }
+      }
+
       .condition-container {
         display: flex;
         align-items: center;
@@ -485,12 +518,20 @@ const Book = () => {
           <div className='price-container'>
             <p className='price'>$ 32</p>
           </div>
+
           <div className='condition-container'>
             <p className='condition'>
               <span>Condition: </span>
               <span>Used</span>
             </p>
           </div>
+          <Button
+            className='favourite-button'
+            content='Add to favourites'
+            backgroundColor='darkGrey'
+            borderColor='white'
+            textColor='white'
+          />
         </div>
       </div>
       <p className='description'>
