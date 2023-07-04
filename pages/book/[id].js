@@ -381,12 +381,12 @@ const StyledWrapper = styled.div`
     }
 
     .contact-info {
-      margin: 35px 30px 0 30px;
+      margin: 35px 30px;
 
       display: flex;
 
       @media (min-width: 768px) {
-        margin: 35px 80px 0 80px;
+        margin: 35px 80px;
         justify-content: center;
       }
 
@@ -417,24 +417,6 @@ const StyledWrapper = styled.div`
           font-size: ${({ theme }) => theme.fontSize.XS};
           color: ${({ theme }) => theme.color.lightGrey};
         }
-      }
-    }
-
-    .phone-button {
-      margin: 25px 30px 35px 30px;
-      width: calc(100% - 60px);
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      @media (min-width: 768px) {
-        margin: 25px 80px 35px 80px;
-        width: calc(100% - 160px);
-      }
-
-      span {
-        margin-left: 5px;
       }
     }
   }
@@ -482,8 +464,7 @@ const StyledWrapper = styled.div`
         }
       }
 
-      .email,
-      .phone {
+      .email {
         font-size: ${({ theme }) => theme.fontSize.XS};
         margin-top: 5px;
 
@@ -585,18 +566,6 @@ const Book = () => {
             <p className='email'>{sellerEmail}</p>
           </div>
         </div>
-        <Button
-          className='phone-button'
-          backgroundColor='yellow'
-          borderColor='blue'
-          textColor='blue'
-          content={
-            <>
-              <Image src={phoneIcon} alt='' />
-              <span>+10 123 456 789</span>
-            </>
-          }
-        />
       </div>
 
       {/* appears only on bigger screens (minimum 1366px) */}
@@ -604,7 +573,6 @@ const Book = () => {
         <div className='text-container'>
           <h2 className='name'>{sellerName}</h2>
           <p className='email'>{sellerEmail}</p>
-          <p className='phone'>+10 123 456 789</p>
         </div>
         <div className='profile-image-container'>
           <Image src={profileImage} alt='' layout='fill' />
