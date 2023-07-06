@@ -1,4 +1,4 @@
-import StyledWrapper from './GeneralSettingsForm.style.js';
+import StyledWrapper from './GeneralSettingsForm.styles.js';
 import Image from 'next/image';
 import Input from 'components/atoms/Input/Input';
 import Button from 'components/atoms/Button/Button';

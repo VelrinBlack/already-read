@@ -8,7 +8,7 @@ import Decoration1 from 'images/decoration1.svg';
 import Decoration2 from 'images/decoration2.svg';
 import { useState } from 'react';
 import CloseIcon from 'images/close.svg';
-import StyledWrapper from 'styles/pages/myaccount.style';
+import StyledWrapper from 'styles/pages/myaccount.styles';
 
 const MyAccount = () => {
   const [menuActive, setMenuActive] = useState(false);

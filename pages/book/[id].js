@@ -7,7 +7,7 @@ import { useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import UserContext from 'UserContext';
-import StyledWrapper from 'styles/pages/book/[id].style';
+import StyledWrapper from 'styles/pages/book/[id].styles';
 
 const Book = () => {
   const [title, setTitle] = useState('Loading...');

@@ -10,7 +10,7 @@ import Button from 'components/atoms/Button/Button';
 import { useContext } from 'react';
 import UserContext from 'UserContext';
 import Link from 'next/link';
-import StyledWrapper from 'styles/pages/search.style';
+import StyledWrapper from 'styles/pages/search.styles';
 
 const Search = () => {
   const router = useRouter();

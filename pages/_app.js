@@ -1,6 +1,6 @@
 import { ThemeProvider } from 'styled-components';
 import theme from 'styles/theme';
-import GlobalStyle from 'styles/globalStyle';
+import GlobalStyle from 'styles/globalStyles';
 import { useState, useEffect } from 'react';
 import UserContext from 'UserContext';
 

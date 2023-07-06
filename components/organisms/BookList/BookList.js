@@ -1,4 +1,4 @@
-import StyledWrapper from './BookList.style';
+import StyledWrapper from './BookList.styles';
 import BookCard from '../../molecules/BookCard/BookCard';
 
 const BookList = ({ books }) => (

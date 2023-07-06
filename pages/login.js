@@ -4,7 +4,7 @@ import Button from 'components/atoms/Button/Button';
 import Logo from 'components/atoms/Logo/Logo';
 import UserContext from 'UserContext';
 import { useRouter } from 'next/router';
-import StyledWrapper from 'styles/pages/login.style';
+import StyledWrapper from 'styles/pages/login.styles';
 
 const Login = () => {
   const router = useRouter();

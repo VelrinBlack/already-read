@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import StyledWrapper from './SearchBoxSection.style';
+import StyledWrapper from './SearchBoxSection.styles';
 import searchIcon from 'images/search.svg';
 import { useRouter } from 'next/router';
 import Input from 'components/atoms/Input/Input';
