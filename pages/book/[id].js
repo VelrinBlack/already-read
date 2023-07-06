@@ -5,9 +5,10 @@ import bookCover from 'images/book_cover.webp';
 import profileImage from 'images/profile.svg';
 import Button from 'components/atoms/Button/Button';
 import phoneIcon from 'images/phone.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import UserContext from 'UserContext';
 
 const StyledWrapper = styled.div`
   padding-top: 40px;
@@ -499,6 +500,8 @@ const Book = () => {
   const router = useRouter();
   const { id: bookID } = router.query;
 
+  const { user } = useContext(UserContext);
+
   useEffect(() => {
     if (bookID) {
       axios
@@ -535,13 +538,15 @@ const Book = () => {
               <span>{condition}</span>
             </p>
           </div>
-          <Button
-            className='favourite-button'
-            content='Add to favourites'
-            backgroundColor='darkGrey'
-            borderColor='white'
-            textColor='white'
-          />
+          {user && (
+            <Button
+              className='favourite-button'
+              content='Add to favourites'
+              backgroundColor='darkGrey'
+              borderColor='white'
+              textColor='white'
+            />
+          )}
         </div>
       </div>
       <p className='description'>
