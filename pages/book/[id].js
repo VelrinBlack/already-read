@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import UserContext from 'UserContext';
 import StyledWrapper from 'styles/pages/book/[id].styles';
+import strings from 'strings.json';
 
 const Book = () => {
   const [title, setTitle] = useState('Loading...');
@@ -15,6 +16,7 @@ const Book = () => {
   const [condition, setCondition] = useState('...');
   const [sellerName, setSellerName] = useState('...');
   const [sellerEmail, setSellerEmail] = useState('Loading seller info...');
+  const [isFavourite, setIsFavourite] = useState(null);
 
   const router = useRouter();
   const { id: bookID } = router.query;
@@ -38,6 +40,27 @@ const Book = () => {
     }
   }, [bookID, router]);
 
+  useEffect(() => {
+    if (bookID && user) {
+      axios
+        .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/checkIfFavourite?bookID=${bookID}`, {
+          headers: {
+            Authorization: user.token,
+          },
+        })
+        .then((res) => {
+          if (res.data.message === strings.apiResponseMessage.bookIsFavourite) {
+            setIsFavourite(true);
+          } else if (res.data.message === strings.apiResponseMessage.bookIsNotFavourite) {
+            setIsFavourite(false);
+          }
+        })
+        .catch(() => {
+          router.push('/');
+        });
+    }
+  }, [user, bookID, router]);
+
   return (
     <StyledWrapper>
       <Logo />
@@ -58,13 +81,33 @@ const Book = () => {
             </p>
           </div>
           {user && (
-            <Button
-              className='favourite-button'
-              content='Add to favourites'
-              backgroundColor='darkGrey'
-              borderColor='white'
-              textColor='white'
-            />
+            <>
+              {isFavourite === null ? (
+                <Button
+                  className='favourite-button'
+                  content='Loading...'
+                  backgroundColor='darkGrey'
+                  borderColor='white'
+                  textColor='white'
+                />
+              ) : isFavourite ? (
+                <Button
+                  className='favourite-button'
+                  content='Remove from favourites'
+                  backgroundColor='darkGrey'
+                  borderColor='white'
+                  textColor='white'
+                />
+              ) : (
+                <Button
+                  className='favourite-button'
+                  content='Add to favourites'
+                  backgroundColor='darkGrey'
+                  borderColor='white'
+                  textColor='white'
+                />
+              )}
+            </>
           )}
         </div>
       </div>
