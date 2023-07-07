@@ -61,6 +61,48 @@ const Book = () => {
     }
   }, [user, bookID, router]);
 
+  const removeFromFavourites = () => {
+    setIsFavourite(null);
+    axios
+      .delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/removeFavourite/${bookID}`, {
+        headers: {
+          Authorization: user.token,
+        },
+      })
+      .then((res) => {
+        if (res.data.message === strings.apiResponseMessage.removedSuccessfully) {
+          setIsFavourite(false);
+        }
+      })
+      .catch(() => {
+        router.push('/');
+      });
+  };
+
+  const addToFavourites = () => {
+    setIsFavourite(null);
+    axios
+      .post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/addFavourite`,
+        {
+          bookID,
+        },
+        {
+          headers: {
+            Authorization: user.token,
+          },
+        },
+      )
+      .then((res) => {
+        if (res.data.message === strings.apiResponseMessage.createdSuccessfully) {
+          setIsFavourite(true);
+        }
+      })
+      .catch(() => {
+        router.push('/');
+      });
+  };
+
   return (
     <StyledWrapper>
       <Logo />
@@ -97,6 +139,7 @@ const Book = () => {
                   backgroundColor='darkGrey'
                   borderColor='white'
                   textColor='white'
+                  onClick={removeFromFavourites}
                 />
               ) : (
                 <Button
@@ -105,6 +148,7 @@ const Book = () => {
                   backgroundColor='darkGrey'
                   borderColor='white'
                   textColor='white'
+                  onClick={addToFavourites}
                 />
               )}
             </>
