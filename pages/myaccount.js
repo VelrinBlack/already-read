@@ -6,16 +6,36 @@ import BackIcon from 'images/back.svg';
 import Link from 'next/link';
 import Decoration1 from 'images/decoration1.svg';
 import Decoration2 from 'images/decoration2.svg';
-import { useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import CloseIcon from 'images/close.svg';
 import StyledWrapper from 'styles/pages/myaccount.styles';
 import strings from 'strings.json';
+import BookList from 'components/organisms/BookList/BookList';
+import axios from 'axios';
+import UserContext from 'UserContext';
+import { useRouter } from 'next/router';
 
 const MyAccount = () => {
   const { general, myBooks, messages, favourites } = strings.myAccountSection;
+  const { user } = useContext(UserContext);
+  const router = useRouter();
 
   const [menuActive, setMenuActive] = useState(false);
   const [activeSection, setActiveSection] = useState(general);
+  const [books, setBooks] = useState(null);
+
+  useEffect(() => {
+    if (activeSection === favourites) {
+      axios
+        .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/allFavourites`, {
+          headers: {
+            Authorization: user.token,
+          },
+        })
+        .then((res) => setBooks(res.data.favourites))
+        .catch(() => router.push('/'));
+    }
+  }, [activeSection, favourites, user, router]);
 
   return (
     <StyledWrapper>
@@ -61,7 +81,23 @@ const MyAccount = () => {
       <main>
         <h2 className='section-title'>{activeSection}</h2>
 
-        {activeSection === general ? <GeneralSettingsForm /> : 'Available soon'}
+        {activeSection === general ? (
+          <GeneralSettingsForm />
+        ) : activeSection === myBooks ? (
+          'Available soon'
+        ) : activeSection === messages ? (
+          'Available soon'
+        ) : (
+          <>
+            {books === null ? (
+              <p className='loading-favourites'>Loading...</p>
+            ) : !books.length ? (
+              <p className='no-favourites'>Your list is empty</p>
+            ) : (
+              <BookList books={books} />
+            )}
+          </>
+        )}
       </main>
 
       <nav className='desktop-navigation'>

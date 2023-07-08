@@ -19,7 +19,7 @@ const BookCard = ({ data: { title, price, ISBN, condition, imageName, _id } }) =
   }, []);
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className='book-card'>
       <Link href={`/book/${_id}`} passHref>
         <div className='image-container'>
           <Image

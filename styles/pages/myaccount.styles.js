@@ -204,6 +204,36 @@ const StyledWrapper = styled.div`
         display: none;
       }
     }
+
+    .loading-favourites,
+    .no-favourites {
+      color: ${({ theme }) => theme.color.white};
+      font-size: ${({ theme }) => theme.fontSize.XS};
+      margin-top: 50px;
+
+      @media (min-width: 1366px) {
+        font-size: ${({ theme }) => theme.fontSize.S};
+        margin: 0;
+      }
+    }
+
+    .book-list {
+      @media (min-width: 768px) {
+        margin-top: 50px;
+      }
+      @media (min-width: 1366px) {
+        margin: 0;
+      }
+
+      .book-card {
+        @media (min-width: 768px) {
+          width: 500px;
+        }
+        @media (min-width: 1366px) {
+          width: 740px;
+        }
+      }
+    }
   }
 
   .desktop-navigation {
