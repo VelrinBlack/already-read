@@ -9,9 +9,13 @@ import Decoration2 from 'images/decoration2.svg';
 import { useState } from 'react';
 import CloseIcon from 'images/close.svg';
 import StyledWrapper from 'styles/pages/myaccount.styles';
+import strings from 'strings.json';
 
 const MyAccount = () => {
+  const { general, myBooks, messages, favourites } = strings.myAccountSection;
+
   const [menuActive, setMenuActive] = useState(false);
+  const [activeSection, setActiveSection] = useState(general);
 
   return (
     <StyledWrapper>
@@ -30,10 +34,15 @@ const MyAccount = () => {
           <div className='menu'>
             <nav className='mobile-navigation'>
               <ul>
-                <li className='active'>General</li>
-                <li>My books</li>
-                <li>Messages</li>
-                <li>Favourites</li>
+                {Object.values(strings.myAccountSection).map((sectionName) => (
+                  <li
+                    onClick={() => setActiveSection(sectionName)}
+                    className={activeSection === sectionName && 'active'}
+                    key={sectionName}
+                  >
+                    {sectionName}
+                  </li>
+                ))}
               </ul>
             </nav>
             <button className='close-button' onClick={() => setMenuActive(false)}>
@@ -50,9 +59,9 @@ const MyAccount = () => {
       </div>
 
       <main>
-        <h2 className='section-title'>General</h2>
+        <h2 className='section-title'>{activeSection}</h2>
 
-        <GeneralSettingsForm />
+        {activeSection === general ? <GeneralSettingsForm /> : 'Available soon'}
       </main>
 
       <nav className='desktop-navigation'>
@@ -60,10 +69,15 @@ const MyAccount = () => {
           <Image src={Decoration2} alt='' layout='fill' />
         </div>
         <ul>
-          <li className='active'>General</li>
-          <li>My books</li>
-          <li>Messages</li>
-          <li>Favourites</li>
+          {Object.values(strings.myAccountSection).map((sectionName) => (
+            <li
+              onClick={() => setActiveSection(sectionName)}
+              className={activeSection === sectionName && 'active'}
+              key={sectionName}
+            >
+              {sectionName}
+            </li>
+          ))}
         </ul>
         <Link href='/' passHref>
           <button>

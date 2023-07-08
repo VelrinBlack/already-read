@@ -18,5 +18,11 @@
     "removedSuccessfully": "Removed successfully",
     "bookIsFavourite": "Book is favourite",
     "bookIsNotFavourite": "Book is not favourite"
+  },
+  "myAccountSection": {
+    "general": "General",
+    "myBooks": "My books",
+    "messages": "Messages",
+    "favourites": "Favourites"
   }
 }
