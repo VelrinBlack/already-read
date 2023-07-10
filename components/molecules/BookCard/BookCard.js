@@ -1,11 +1,20 @@
 import StyledWrapper from './BookCard.styles';
 import Image from 'next/image';
 import likeImg from 'images/like.svg';
-import { useState, useEffect } from 'react';
+import dislikeImg from 'images/dislike.svg';
+import { useState, useEffect, useContext } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
+import UserContext from 'UserContext';
+import axios from 'axios';
+import strings from 'strings.json';
 
 const BookCard = ({ data: { title, price, ISBN, condition, imageName, _id } }) => {
   const [viewportWidth, setViewportWidth] = useState(0);
+  const [isFavourite, setIsFavourite] = useState(null);
+
+  const { user } = useContext(UserContext);
+  const router = useRouter();
 
   const handleResize = () => setViewportWidth(window.innerWidth);
 
@@ -17,6 +26,69 @@ const BookCard = ({ data: { title, price, ISBN, condition, imageName, _id } }) =
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/checkIfFavourite?bookID=${_id}`, {
+          headers: {
+            Authorization: user.token,
+          },
+        })
+        .then((res) => {
+          if (res.data.message === strings.apiResponseMessage.bookIsFavourite) {
+            setIsFavourite(true);
+          } else if (res.data.message === strings.apiResponseMessage.bookIsNotFavourite) {
+            setIsFavourite(false);
+          }
+        })
+        .catch(() => {
+          router.push('/');
+        });
+    }
+  }, [user, router, _id]);
+
+  const removeFromFavourites = () => {
+    setIsFavourite(null);
+    axios
+      .delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/removeFavourite/${_id}`, {
+        headers: {
+          Authorization: user.token,
+        },
+      })
+      .then((res) => {
+        if (res.data.message === strings.apiResponseMessage.removedSuccessfully) {
+          setIsFavourite(false);
+        }
+      })
+      .catch(() => {
+        router.push('/');
+      });
+  };
+
+  const addToFavourites = () => {
+    setIsFavourite(null);
+    axios
+      .post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/addFavourite`,
+        {
+          bookID: _id,
+        },
+        {
+          headers: {
+            Authorization: user.token,
+          },
+        },
+      )
+      .then((res) => {
+        if (res.data.message === strings.apiResponseMessage.createdSuccessfully) {
+          setIsFavourite(true);
+        }
+      })
+      .catch(() => {
+        router.push('/');
+      });
+  };
 
   return (
     <StyledWrapper className='book-card'>
@@ -43,15 +115,39 @@ const BookCard = ({ data: { title, price, ISBN, condition, imageName, _id } }) =
           <div className='price-container'>
             <p className='price'>$ {price}</p>
           </div>
-          <button className='like-button'>
-            {viewportWidth >= 768 ? (
-              <p className='like-text'>Add to favourites</p>
-            ) : (
-              <div className='like-image-container'>
-                <Image src={likeImg} alt='like image' layout='fill' />
-              </div>
-            )}
-          </button>
+          {user && (
+            <>
+              {isFavourite === null ? (
+                <button className='like-button'>
+                  {viewportWidth >= 768 ? (
+                    <p className='like-text'>Loading...</p>
+                  ) : (
+                    <p className='like-text'>...</p>
+                  )}
+                </button>
+              ) : isFavourite ? (
+                <button className='like-button' onClick={removeFromFavourites}>
+                  {viewportWidth >= 768 ? (
+                    <p className='like-text'>Remove favourite</p>
+                  ) : (
+                    <div className='like-image-container'>
+                      <Image src={dislikeImg} alt='dislike image' layout='fill' />
+                    </div>
+                  )}
+                </button>
+              ) : (
+                <button className='like-button' onClick={addToFavourites}>
+                  {viewportWidth >= 768 ? (
+                    <p className='like-text'>Add to favourites</p>
+                  ) : (
+                    <div className='like-image-container'>
+                      <Image src={likeImg} alt='like image' layout='fill' />
+                    </div>
+                  )}
+                </button>
+              )}
+            </>
+          )}
         </div>
       </div>
     </StyledWrapper>
