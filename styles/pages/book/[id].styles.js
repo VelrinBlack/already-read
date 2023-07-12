@@ -38,8 +38,10 @@ const StyledWrapper = styled.div`
   }
 
   .book-cover-container {
+    position: relative;
     width: 200px;
     margin-top: 40px;
+    aspect-ratio: 1 / 1.42;
     z-index: 1;
 
     @media (min-width: 768px) {

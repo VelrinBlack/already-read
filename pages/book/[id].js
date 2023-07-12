@@ -11,6 +11,7 @@ import StyledWrapper from 'styles/pages/book/[id].styles';
 import strings from 'strings.json';
 
 const Book = () => {
+  const [imageName, setImageName] = useState('');
   const [title, setTitle] = useState('Loading...');
   const [price, setPrice] = useState('...');
   const [condition, setCondition] = useState('...');
@@ -28,6 +29,7 @@ const Book = () => {
       axios
         .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/book/getOne?id=${bookID}`)
         .then((res) => {
+          setImageName(res.data.book.imageName);
           setTitle(res.data.book.title);
           setPrice(res.data.book.price);
           setCondition(res.data.book.condition);
@@ -107,7 +109,12 @@ const Book = () => {
     <StyledWrapper>
       <Logo />
       <div className='book-cover-container'>
-        <Image src={bookCover} alt='book cover' />
+        <Image
+          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/book/image/${imageName}`}
+          alt='book cover'
+          layout='fill'
+          objectFit='cover'
+        />
       </div>
       <div className='first-background'>
         <h2 className='title'>{title}</h2>
