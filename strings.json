@@ -17,7 +17,8 @@
     "updatedSuccessfully": "Updated successfully",
     "removedSuccessfully": "Removed successfully",
     "bookIsFavourite": "Book is favourite",
-    "bookIsNotFavourite": "Book is not favourite"
+    "bookIsNotFavourite": "Book is not favourite",
+    "unsupportedFileType": "Unsupported file type"
   },
   "myAccountSection": {
     "general": "General",

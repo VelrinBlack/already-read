@@ -10,6 +10,7 @@ import strings from 'strings.json';
 import axios from 'axios';
 
 const GeneralSettingsForm = () => {
+  const [profileImage, setProfileImage] = useState(null);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [oldPassword, setOldPassword] = useState('');
@@ -90,21 +91,20 @@ const GeneralSettingsForm = () => {
       setError('');
     }
 
+    const formData = new FormData();
+    formData.append('profileImage', profileImage);
+    formData.append('newName', name);
+    formData.append('newEmail', email);
+    formData.append('oldPassword', oldPassword);
+    formData.append('newPassword', newPassword);
+
     axios
-      .patch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/update`,
-        {
-          newName: name,
-          newEmail: email,
-          oldPassword,
-          newPassword,
+      .patch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/update`, formData, {
+        headers: {
+          Authorization: user.token,
+          'content-type': 'multipart/form-data',
         },
-        {
-          headers: {
-            Authorization: user.token,
-          },
-        },
-      )
+      })
       .then((res) => {
         if (res.data.message === strings.apiResponseMessage.updatedSuccessfully) {
           saveUser(res.data);
@@ -120,6 +120,8 @@ const GeneralSettingsForm = () => {
           setError('Invalid credentials');
         } else if (err.response?.data.message === strings.apiResponseMessage.alreadyExists) {
           setError('The email is already taken');
+        } else if (err.response?.data.message === strings.apiResponseMessage.unsupportedFileType) {
+          setError('Unsupported image type');
         } else {
           setError('Something went wrong');
         }
@@ -129,7 +131,14 @@ const GeneralSettingsForm = () => {
   return (
     <StyledWrapper onSubmit={handleSubmit}>
       <button className='change-image-button' type='button'>
-        <Image src={profileIcon} layout='fill' alt='profile icon' />
+        <input
+          type='file'
+          className='file-input'
+          onChange={(e) => setProfileImage(e.target.files[0])}
+        />
+        <div className='image-container'>
+          <Image src={profileIcon} layout='fill' alt='profile icon' />
+        </div>
       </button>
 
       <label htmlFor='name'>Name:</label>
