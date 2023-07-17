@@ -64,6 +64,27 @@ const GeneralSettingsForm = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    if (user) {
+      axios({
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profileImage`,
+        method: 'GET',
+        responseType: 'blob',
+        headers: {
+          Authorization: user.token,
+        },
+      })
+        .then((res) => {
+          setProfileImage(res.data);
+        })
+        .catch((err) => {
+          if (err.response?.data.message === strings.apiResponseMessage.invalidCredentials) {
+            router.push('/');
+          }
+        });
+    }
+  }, [user, router]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -134,10 +155,16 @@ const GeneralSettingsForm = () => {
         <input
           type='file'
           className='file-input'
-          onChange={(e) => setProfileImage(e.target.files[0])}
+          onChange={(e) => {
+            if (e.target.files.length) setProfileImage(e.target.files[0]);
+          }}
         />
         <div className='image-container'>
-          <Image src={profileIcon} layout='fill' alt='profile icon' />
+          {profileImage ? (
+            <Image src={URL.createObjectURL(profileImage)} layout='fill' alt='profile image' />
+          ) : (
+            <Image src={profileIcon} layout='fill' alt='profile icon' />
+          )}
         </div>
       </button>
 
