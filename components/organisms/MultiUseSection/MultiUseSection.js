@@ -1,24 +1,58 @@
 import StyledWrapper from './MultiUseSection.styles';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Image from 'next/image';
 import profileIcon from 'images/profile.svg';
 import UserContext from 'UserContext';
 import Button from 'components/atoms/Button/Button';
 import LogInSignUpForm from 'components/molecules/LogInSignUpForm/LogInSignUpForm';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+import strings from 'strings.json';
 
 const MultiUseSection = () => {
-  const { user, setUser } = useContext(UserContext);
+  const router = useRouter();
+  const { user } = useContext(UserContext);
   const [formType, setFormType] = useState('login');
+  const [profileImage, setProfileImage] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      axios({
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profileImage`,
+        method: 'GET',
+        responseType: 'blob',
+        headers: {
+          Authorization: user.token,
+        },
+      })
+        .then((res) => {
+          setProfileImage(res.data);
+        })
+        .catch((err) => {
+          if (err.response?.data.message === strings.apiResponseMessage.invalidCredentials) {
+            router.push('/');
+          }
+        });
+    }
+  }, [user, router]);
 
   return (
     <StyledWrapper user={user}>
       {user ? ( // this appears only on bigger screens
         <>
           <div className='container'>
-            <div className='image-border'>
+            <div className='image-shadow'>
               <div className='image-container'>
-                <Image src={profileIcon} layout='fill' alt='profile picture' />
+                {profileImage ? (
+                  <Image
+                    src={URL.createObjectURL(profileImage)}
+                    layout='fill'
+                    alt='profile image'
+                  />
+                ) : (
+                  <Image src={profileIcon} layout='fill' alt='profile icon' />
+                )}
               </div>
             </div>
             <h2 className='user-name'>{user.name}</h2>

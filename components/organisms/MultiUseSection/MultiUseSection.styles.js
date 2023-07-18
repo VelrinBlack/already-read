@@ -97,12 +97,11 @@ const StyledWrapper = styled.section`
       }
     }
 
-    .image-border {
+    .image-shadow {
       width: 110px;
       height: 110px;
-      padding: 2.5px;
 
-      background-color: ${({ theme }) => theme.color.blue};
+      box-shadow: 0 0 15px ${({ theme }) => theme.color.lightGrey};
       border-radius: 100%;
 
       @media (min-width: 2560px) {
@@ -116,6 +115,11 @@ const StyledWrapper = styled.section`
         position: relative;
         width: 100%;
         height: 100%;
+
+        img {
+          border-radius: 100%;
+          object-fit: cover;
+        }
       }
     }
 
