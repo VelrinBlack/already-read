@@ -177,7 +177,13 @@ const Book = () => {
       <div className='second-background'>
         <div className='contact-info'>
           <div className='profile-image-container'>
-            <Image src={profileImage} alt='' layout='fill' />
+            {user && (
+              <Image
+                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profileImage/${user.email}`}
+                alt='profile image'
+                layout='fill'
+              />
+            )}
           </div>
           <div className='text-container'>
             <h2 className='name'>{sellerName}</h2>
@@ -193,7 +199,13 @@ const Book = () => {
           <p className='email'>{sellerEmail}</p>
         </div>
         <div className='profile-image-container'>
-          <Image src={profileImage} alt='' layout='fill' />
+          {user && (
+            <Image
+              src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profileImage/${user.email}`}
+              alt='profile image'
+              layout='fill'
+            />
+          )}
         </div>
       </div>
     </StyledWrapper>

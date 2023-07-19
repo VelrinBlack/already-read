@@ -387,6 +387,13 @@ const StyledWrapper = styled.div`
         position: relative;
         width: 70px;
         height: 70px;
+        border-radius: 100%;
+        box-shadow: 0 0 15px ${({ theme }) => theme.color.lightGrey};
+
+        img {
+          border-radius: 100%;
+          object-fit: cover;
+        }
       }
 
       .text-container {
@@ -473,10 +480,17 @@ const StyledWrapper = styled.div`
       width: 100px;
       height: 100px;
       margin-left: 25px;
+      border-radius: 100%;
+      box-shadow: 0 0 15px ${({ theme }) => theme.color.lightGrey};
 
       @media (min-width: 2560px) {
         width: 140px;
         height: 140px;
+      }
+
+      img {
+        border-radius: 100%;
+        object-fit: cover;
       }
     }
   }
