@@ -19,12 +19,9 @@ const MultiUseSection = () => {
   useEffect(() => {
     if (user) {
       axios({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profileImage`,
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profileImage/${user.email}`,
         method: 'GET',
         responseType: 'blob',
-        headers: {
-          Authorization: user.token,
-        },
       })
         .then((res) => {
           setProfileImage(res.data);
