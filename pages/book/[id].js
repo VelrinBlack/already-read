@@ -18,6 +18,7 @@ const Book = () => {
   const [sellerName, setSellerName] = useState('...');
   const [sellerEmail, setSellerEmail] = useState('Loading seller info...');
   const [isFavourite, setIsFavourite] = useState(null);
+  const [description, setDescription] = useState('...');
 
   const router = useRouter();
   const { id: bookID } = router.query;
@@ -35,6 +36,7 @@ const Book = () => {
           setCondition(res.data.book.condition);
           setSellerName(res.data.book.seller.name);
           setSellerEmail(res.data.book.seller.email);
+          setDescription(res.data.book.description);
         })
         .catch(() => {
           router.push('/');
@@ -162,18 +164,7 @@ const Book = () => {
           )}
         </div>
       </div>
-      <p className='description'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc. Sociis natoque
-        penatibus et magnis dis parturient montes nascetur. Pellentesque massa placerat duis
-        ultricies. Fusce ut placerat orci nulla. Sed faucibus turpis in eu. Risus quis varius quam
-        quisque id diam vel quam elementum. Malesuada fames ac turpis egestas sed tempus urna et.
-        Amet venenatis urna cursus eget nunc scelerisque. Pretium vulputate sapien nec sagittis
-        aliquam malesuada bibendum. Sed odio morbi quis commodo odio aenean sed adipiscing diam.
-        Augue mauris augue neque gravida in fermentum et sollicitudin ac. Elit pellentesque habitant
-        morbi tristique senectus et netus et malesuada. Suspendisse sed nisi lacus sed viverra
-        tellus in.
-      </p>
+      <p className='description'>{description}</p>
       <div className='second-background'>
         <div className='contact-info'>
           <div className='profile-image-container'>
