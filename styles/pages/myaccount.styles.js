@@ -205,8 +205,8 @@ const StyledWrapper = styled.div`
       }
     }
 
-    .loading-favourites,
-    .no-favourites {
+    .loading-books,
+    .no-books {
       color: ${({ theme }) => theme.color.white};
       font-size: ${({ theme }) => theme.fontSize.XS};
       margin-top: 50px;

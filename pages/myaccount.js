@@ -22,20 +22,36 @@ const MyAccount = () => {
 
   const [menuActive, setMenuActive] = useState(false);
   const [activeSection, setActiveSection] = useState(GENERAL);
-  const [books, setBooks] = useState(null);
+  const [myBooks, setMyBooks] = useState(null);
+  const [favouriteBooks, setFavouriteBooks] = useState(null);
 
   useEffect(() => {
-    if (activeSection === FAVOURITES) {
-      axios
-        .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/allFavourites`, {
-          headers: {
-            Authorization: user.token,
-          },
-        })
-        .then((res) => setBooks(res.data.favourites))
-        .catch(() => router.push('/'));
+    switch (activeSection) {
+      case MY_BOOKS: {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/books/${user.email}`)
+          .then((res) => setMyBooks(res.data.books))
+          .catch(() => router.push('/'));
+        break;
+      }
+
+      case FAVOURITES: {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/allFavourites`, {
+            headers: {
+              Authorization: user.token,
+            },
+          })
+          .then((res) => setFavouriteBooks(res.data.favourites))
+          .catch(() => router.push('/'));
+        break;
+      }
+
+      default: {
+        break;
+      }
     }
-  }, [activeSection, FAVOURITES, user, router]);
+  }, [activeSection, user, router, MY_BOOKS, FAVOURITES]);
 
   return (
     <StyledWrapper>
@@ -84,17 +100,25 @@ const MyAccount = () => {
         {activeSection === GENERAL ? (
           <GeneralSettingsForm />
         ) : activeSection === MY_BOOKS ? (
-          'Available soon'
+          <>
+            {myBooks === null ? (
+              <p className='loading-books'>Loading...</p>
+            ) : !myBooks.length ? (
+              <p className='no-books'>Your list is empty</p>
+            ) : (
+              <BookList books={myBooks} />
+            )}
+          </>
         ) : activeSection === MESSAGES ? (
           'Available soon'
         ) : (
           <>
-            {books === null ? (
-              <p className='loading-favourites'>Loading...</p>
-            ) : !books.length ? (
-              <p className='no-favourites'>Your list is empty</p>
+            {favouriteBooks === null ? (
+              <p className='loading-books'>Loading...</p>
+            ) : !favouriteBooks.length ? (
+              <p className='no-books'>Your list is empty</p>
             ) : (
-              <BookList books={books} />
+              <BookList books={favouriteBooks} />
             )}
           </>
         )}
