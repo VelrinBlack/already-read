@@ -16,16 +16,16 @@ import UserContext from 'UserContext';
 import { useRouter } from 'next/router';
 
 const MyAccount = () => {
-  const { general, myBooks, messages, favourites } = strings.myAccountSection;
+  const { GENERAL, MY_BOOKS, MESSAGES, FAVOURITES } = strings.myAccountSection;
   const { user } = useContext(UserContext);
   const router = useRouter();
 
   const [menuActive, setMenuActive] = useState(false);
-  const [activeSection, setActiveSection] = useState(general);
+  const [activeSection, setActiveSection] = useState(GENERAL);
   const [books, setBooks] = useState(null);
 
   useEffect(() => {
-    if (activeSection === favourites) {
+    if (activeSection === FAVOURITES) {
       axios
         .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/allFavourites`, {
           headers: {
@@ -35,7 +35,7 @@ const MyAccount = () => {
         .then((res) => setBooks(res.data.favourites))
         .catch(() => router.push('/'));
     }
-  }, [activeSection, favourites, user, router]);
+  }, [activeSection, FAVOURITES, user, router]);
 
   return (
     <StyledWrapper>
@@ -81,11 +81,11 @@ const MyAccount = () => {
       <main>
         <h2 className='section-title'>{activeSection}</h2>
 
-        {activeSection === general ? (
+        {activeSection === GENERAL ? (
           <GeneralSettingsForm />
-        ) : activeSection === myBooks ? (
+        ) : activeSection === MY_BOOKS ? (
           'Available soon'
-        ) : activeSection === messages ? (
+        ) : activeSection === MESSAGES ? (
           'Available soon'
         ) : (
           <>

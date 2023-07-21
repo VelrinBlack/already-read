@@ -38,7 +38,7 @@ const Search = () => {
           setBooks(res.data.books);
         })
         .catch((err) => {
-          if (err.response?.data.message === strings.apiResponseMessage.notFound) {
+          if (err.response?.data.message === strings.apiResponseMessage.NOT_FOUND) {
             setError('No books found');
           } else {
             setError('Something went wrong');

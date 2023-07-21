@@ -1,29 +1,29 @@
 {
   "formError": {
-    "parameterMissing": "Please fill in all fields",
-    "invalidEmail": "Please enter valid email address",
-    "invalidName": "Please enter valid name",
-    "tooShortPassword": "Please enter longer password"
+    "PARAMETER_MISSING": "Please fill in all fields",
+    "INVALID_EMAIL": "Please enter valid email address",
+    "INVALID_NAME": "Please enter valid name",
+    "TOO_SHORT_PASSWORD": "Please enter longer password"
   },
   "apiResponseMessage": {
-    "invalidParameters": "Invalid parameters",
-    "alreadyExists": "Already exists",
-    "createdSuccessfully": "Created successfully",
-    "invalidCredentials": "Invalid credentials",
-    "authenticatedSuccessfully": "Authenticated successfully",
-    "internalServerError": "Internal server error",
-    "invalidAuthorizationToken": "Invalid authorization token",
-    "notFound": "Not Found",
-    "updatedSuccessfully": "Updated successfully",
-    "removedSuccessfully": "Removed successfully",
-    "bookIsFavourite": "Book is favourite",
-    "bookIsNotFavourite": "Book is not favourite",
-    "unsupportedFileType": "Unsupported file type"
+    "INVALID_PARAMETERS": "Invalid parameters",
+    "ALREADY_EXISTS": "Already exists",
+    "CREATED_SUCCESSFULLY": "Created successfully",
+    "INVALID_CREDENTIALS": "Invalid credentials",
+    "AUTHENTICATED_SUCCESSFULLY": "Authenticated successfully",
+    "INTERNAL_SERVER_ERROR": "Internal server error",
+    "INVALID_AUTHORIZATION_TOKEN": "Invalid authorization token",
+    "NOT_FOUND": "Not Found",
+    "UPDATED_SUCCESSFULLY": "Updated successfully",
+    "REMOVED_SUCCESSFULLY": "Removed successfully",
+    "BOOK_IS_FAVOURITE": "Book is favourite",
+    "BOOK_IS_NOT_FAVOURITE": "Book is not favourite",
+    "UNSUPPORTED_FILE_TYPE": "Unsupported file type"
   },
   "myAccountSection": {
-    "general": "General",
-    "myBooks": "My books",
-    "messages": "Messages",
-    "favourites": "Favourites"
+    "GENERAL": "General",
+    "MY_BOOKS": "My books",
+    "MESSAGES": "Messages",
+    "FAVOURITES": "Favourites"
   }
 }

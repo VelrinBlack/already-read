@@ -51,13 +51,13 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
 
   const handleLoginSubmit = () => {
     if (!loginEmail || !loginPassword) {
-      return setLoginError(strings.formError.parameterMissing);
+      return setLoginError(strings.formError.PARAMETER_MISSING);
     } else {
       setLoginError('');
     }
 
     if (!isEmail(loginEmail)) {
-      return setLoginError(strings.formError.invalidEmail);
+      return setLoginError(strings.formError.INVALID_EMAIL);
     } else {
       setLoginError('');
     }
@@ -68,12 +68,12 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
         password: loginPassword,
       })
       .then((res) => {
-        if (res.data.message === strings.apiResponseMessage.authenticatedSuccessfully) {
+        if (res.data.message === strings.apiResponseMessage.AUTHENTICATED_SUCCESSFULLY) {
           saveUser(res.data);
         }
       })
       .catch((err) => {
-        if (err.response?.data.message === strings.apiResponseMessage.invalidCredentials) {
+        if (err.response?.data.message === strings.apiResponseMessage.INVALID_CREDENTIALS) {
           setLoginError('Invalid credentials');
         } else {
           setLoginError('Something went wrong');
@@ -83,25 +83,25 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
 
   const handleRegisterSubmit = () => {
     if (!registerName || !registerEmail || !registerPassword) {
-      return setRegisterError(strings.formError.parameterMissing);
+      return setRegisterError(strings.formError.PARAMETER_MISSING);
     } else {
       setRegisterError('');
     }
 
     if (registerName.length < 2) {
-      return setRegisterError(strings.formError.invalidName);
+      return setRegisterError(strings.formError.INVALID_NAME);
     } else {
       setRegisterError('');
     }
 
     if (!isEmail(registerEmail)) {
-      return setRegisterError(strings.formError.invalidEmail);
+      return setRegisterError(strings.formError.INVALID_EMAIL);
     } else {
       setRegisterError('');
     }
 
     if (registerPassword.length < 5) {
-      return setRegisterError(strings.formError.tooShortPassword);
+      return setRegisterError(strings.formError.TOO_SHORT_PASSWORD);
     } else {
       setRegisterError('');
     }
@@ -113,12 +113,12 @@ const LogInSignUpForm = ({ formType, setFormType }) => {
         password: registerPassword,
       })
       .then((res) => {
-        if (res.data.message === strings.apiResponseMessage.createdSuccessfully) {
+        if (res.data.message === strings.apiResponseMessage.CREATED_SUCCESSFULLY) {
           saveUser(res.data);
         }
       })
       .catch((err) => {
-        if (err.response?.data.message === strings.apiResponseMessage.alreadyExists) {
+        if (err.response?.data.message === strings.apiResponseMessage.ALREADY_EXISTS) {
           setRegisterError('User already exists');
         } else {
           setRegisterError('Something went wrong');

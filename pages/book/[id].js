@@ -53,9 +53,9 @@ const Book = () => {
           },
         })
         .then((res) => {
-          if (res.data.message === strings.apiResponseMessage.bookIsFavourite) {
+          if (res.data.message === strings.apiResponseMessage.BOOK_IS_FAVOURITE) {
             setIsFavourite(true);
-          } else if (res.data.message === strings.apiResponseMessage.bookIsNotFavourite) {
+          } else if (res.data.message === strings.apiResponseMessage.BOOK_IS_NOT_FAVOURITE) {
             setIsFavourite(false);
           }
         })
@@ -74,7 +74,7 @@ const Book = () => {
         },
       })
       .then((res) => {
-        if (res.data.message === strings.apiResponseMessage.removedSuccessfully) {
+        if (res.data.message === strings.apiResponseMessage.REMOVED_SUCCESSFULLY) {
           setIsFavourite(false);
         }
       })
@@ -98,7 +98,7 @@ const Book = () => {
         },
       )
       .then((res) => {
-        if (res.data.message === strings.apiResponseMessage.createdSuccessfully) {
+        if (res.data.message === strings.apiResponseMessage.CREATED_SUCCESSFULLY) {
           setIsFavourite(true);
         }
       })

@@ -75,7 +75,7 @@ const GeneralSettingsForm = () => {
           setProfileImage(res.data);
         })
         .catch((err) => {
-          if (err.response?.data.message === strings.apiResponseMessage.invalidCredentials) {
+          if (err.response?.data.message === strings.apiResponseMessage.INVALID_CREDENTIALS) {
             router.push('/');
           }
         });
@@ -86,25 +86,25 @@ const GeneralSettingsForm = () => {
     e.preventDefault();
 
     if (!name || !email || !oldPassword || !newPassword) {
-      return setError(strings.formError.parameterMissing);
+      return setError(strings.formError.PARAMETER_MISSING);
     } else {
       setError('');
     }
 
     if (name.length < 2) {
-      return setError(strings.formError.invalidName);
+      return setError(strings.formError.INVALID_NAME);
     } else {
       setError('');
     }
 
     if (!isEmail(email)) {
-      return setError(strings.formError.invalidEmail);
+      return setError(strings.formError.INVALID_EMAIL);
     } else {
       setError('');
     }
 
     if (newPassword.length < 5) {
-      return setError(strings.formError.tooShortPassword);
+      return setError(strings.formError.TOO_SHORT_PASSWORD);
     } else {
       setError('');
     }
@@ -124,7 +124,7 @@ const GeneralSettingsForm = () => {
         },
       })
       .then((res) => {
-        if (res.data.message === strings.apiResponseMessage.updatedSuccessfully) {
+        if (res.data.message === strings.apiResponseMessage.UPDATED_SUCCESSFULLY) {
           saveUser(res.data);
 
           setSuccess(true);
@@ -134,11 +134,13 @@ const GeneralSettingsForm = () => {
         }
       })
       .catch((err) => {
-        if (err.response?.data.message === strings.apiResponseMessage.invalidCredentials) {
+        if (err.response?.data.message === strings.apiResponseMessage.INVALID_CREDENTIALS) {
           setError('Invalid credentials');
-        } else if (err.response?.data.message === strings.apiResponseMessage.alreadyExists) {
+        } else if (err.response?.data.message === strings.apiResponseMessage.ALREADY_EXISTS) {
           setError('The email is already taken');
-        } else if (err.response?.data.message === strings.apiResponseMessage.unsupportedFileType) {
+        } else if (
+          err.response?.data.message === strings.apiResponseMessage.UNSUPPORTED_FILE_TYPE
+        ) {
           setError('Unsupported image type');
         } else {
           setError('Something went wrong');
