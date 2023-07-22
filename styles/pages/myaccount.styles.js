@@ -104,6 +104,7 @@ const StyledWrapper = styled.div`
           font-family: ${({ theme }) => theme.fontFamily.primary};
           font-size: ${({ theme }) => theme.fontSize.XS};
           padding-top: 20px;
+          cursor: pointer;
 
           &:first-of-type {
             padding-top: 0;
@@ -289,6 +290,7 @@ const StyledWrapper = styled.div`
         font-family: ${({ theme }) => theme.fontFamily.primary};
         font-size: ${({ theme }) => theme.fontSize.XS};
         margin-top: 15px;
+        cursor: pointer;
 
         &:first-of-type {
           margin-top: 0;

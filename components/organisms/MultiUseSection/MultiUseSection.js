@@ -37,7 +37,7 @@ const MultiUseSection = () => {
             <Link href='/myaccount' passHref>
               <Button
                 content='My account'
-                textColor='yellow'
+                textColor='white'
                 backgroundColor='blue'
                 className='my-account-button'
               />
@@ -71,7 +71,7 @@ const MultiUseSection = () => {
               </h2>
               <Button
                 content="Let's get started!"
-                textColor='yellow'
+                textColor='white'
                 backgroundColor='blue'
                 className='register-button'
                 onClick={() => setFormType('signup')}

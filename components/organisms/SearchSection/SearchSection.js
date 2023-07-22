@@ -51,7 +51,7 @@ const SearchSection = () => {
         <Link href='/myaccount' passHref>
           <Button
             content='My account'
-            textColor='yellow'
+            textColor='white'
             backgroundColor='blue'
             className='my-account-button'
           />
