@@ -1,18 +1,13 @@
 import StyledWrapper from 'styles/pages/editbook/[id].styles';
 import Logo from 'components/atoms/Logo/Logo';
-import Image from 'next/image';
-import bookCover from 'images/book_cover.webp';
+import EditBookForm from 'components/organisms/EditBookForm/EditBookForm';
 
 const EditBook = () => (
   <StyledWrapper>
     <div className='logo-container'>
       <Logo />
     </div>
-    <div className='background-container'>
-      <div className='book-cover-container'>
-        <Image src={bookCover} alt='book cover' layout='fill' objectFit='cover' />
-      </div>
-    </div>
+    <EditBookForm />
   </StyledWrapper>
 );
 
