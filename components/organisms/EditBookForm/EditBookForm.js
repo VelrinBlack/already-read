@@ -13,22 +13,26 @@ const EditBookForm = () => (
     </div>
 
     <div className='fields-container'>
-      <label htmlFor='title'>Title:</label>
-      <Input id='title' />
-      <label htmlFor='ISBN'>ISBN:</label>
-      <Input id='ISBN' />
-      <div className='double-input-container'>
-        <div className='pair-container'>
-          <label htmlFor='price'>Price:</label>
-          <Input id='price' />
-        </div>
-        <div className='pair-container'>
-          <label htmlFor='condition'>Condition:</label>
-          <Input id='condition' />
+      <div className='flex-container'>
+        <label htmlFor='title'>Title:</label>
+        <Input id='title' />
+        <label htmlFor='ISBN'>ISBN:</label>
+        <Input id='ISBN' />
+        <div className='double-input-container'>
+          <div className='pair-container'>
+            <label htmlFor='price'>Price:</label>
+            <Input id='price' />
+          </div>
+          <div className='pair-container'>
+            <label htmlFor='condition'>Condition:</label>
+            <Input id='condition' />
+          </div>
         </div>
       </div>
-      <label htmlFor='description'>Description:</label>
-      <textarea id='description'></textarea>
+      <div className='flex-container'>
+        <label htmlFor='description'>Description:</label>
+        <textarea id='description'></textarea>
+      </div>
     </div>
 
     <div className='buttons-container'>

@@ -1,12 +1,35 @@
 import styled from 'styled-components';
 
 const StyledWrapper = styled.form`
+  @media (min-width: 1366px) {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    position: relative;
+    width: 1196.9px;
+    margin: auto;
+  }
+
+  @media (min-width: 2560px) {
+    width: 1266.19px;
+  }
+
   .background-container {
     position: relative;
     width: 100%;
 
     display: flex;
     justify-content: center;
+
+    @media (min-width: 1366px) {
+      width: auto;
+      margin-right: 40px;
+    }
+
+    @media (min-width: 2560px) {
+      margin-right: 50px;
+    }
 
     &::before {
       content: '';
@@ -21,6 +44,10 @@ const StyledWrapper = styled.form`
       @media (min-width: 768px) {
         height: 100px;
       }
+
+      @media (min-width: 1366px) {
+        display: none;
+      }
     }
 
     .book-cover-container {
@@ -33,6 +60,16 @@ const StyledWrapper = styled.form`
       @media (min-width: 768px) {
         width: 250px;
         margin-top: 30px;
+      }
+
+      @media (min-width: 1366px) {
+        margin-top: 0;
+        height: 308px;
+        width: auto;
+      }
+
+      @media (min-width: 2560px) {
+        height: 378px;
       }
 
       img {
@@ -49,10 +86,39 @@ const StyledWrapper = styled.form`
       width: 600px;
     }
 
+    @media (min-width: 1366px) {
+      margin: 0;
+      width: auto;
+      display: flex;
+      height: fit-content;
+
+      .flex-container:first-child {
+        width: 400px;
+      }
+
+      .flex-container:nth-child(2) {
+        width: 500px;
+        margin-left: 40px;
+
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    @media (min-width: 2560px) {
+      .flex-container:nth-child(2) {
+        margin-left: 50px;
+      }
+    }
+
     label {
       font-family: ${({ theme }) => theme.fontFamily.primary};
       font-size: ${({ theme }) => theme.fontSize.XXS};
       color: ${({ theme }) => theme.color.white};
+
+      @media (min-width: 2560px) {
+        font-size: ${({ theme }) => theme.fontSize.XS};
+      }
     }
 
     input {
@@ -60,16 +126,34 @@ const StyledWrapper = styled.form`
       background-color: transparent;
       border: 2px solid ${({ theme }) => theme.color.yellow};
       color: ${({ theme }) => theme.color.white};
+
+      @media (min-width: 2560px) {
+        margin: 8px 0 18px 0;
+      }
     }
 
     .double-input-container {
       display: flex;
 
+      @media (min-width: 1366px) {
+        flex-direction: column;
+      }
+
       .pair-container {
         flex: 1;
 
+        @media (min-width: 1366px) {
+          #condition {
+            margin-bottom: 0;
+          }
+        }
+
         &:first-child {
           margin-right: 15px;
+
+          @media (min-width: 1366px) {
+            margin-right: 0;
+          }
         }
       }
     }
@@ -97,8 +181,13 @@ const StyledWrapper = styled.form`
         min-height: 150px;
       }
 
+      @media (min-width: 1366px) {
+        flex: 1;
+      }
+
       @media (min-width: 2560px) {
         font-size: ${({ theme }) => theme.fontSize.S};
+        margin-top: 8px;
       }
     }
   }
@@ -111,6 +200,25 @@ const StyledWrapper = styled.form`
       padding: 45px 0 20px 0;
       margin: 0 auto;
       width: 600px;
+    }
+
+    @media (min-width: 1366px) {
+      width: 100%;
+      padding: 0;
+      margin-top: 20px;
+
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        width: 180px;
+      }
+    }
+
+    @media (min-width: 2560px) {
+      button {
+        width: 210px;
+      }
     }
 
     button:first-child {
