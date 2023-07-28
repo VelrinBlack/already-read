@@ -146,8 +146,14 @@ const StyledWrapper = styled.form`
       border: 2px solid ${({ theme }) => theme.color.yellow};
       color: ${({ theme }) => theme.color.white};
 
+      @media (min-width: 768px) {
+        text-align: start;
+        padding: 12px;
+      }
+
       @media (min-width: 2560px) {
         margin: 8px 0 18px 0;
+        padding: 15px;
       }
     }
 
@@ -191,6 +197,7 @@ const StyledWrapper = styled.form`
       font-family: ${({ theme }) => theme.fontFamily.primary};
       font-size: ${({ theme }) => theme.fontSize.XS};
       color: ${({ theme }) => theme.color.white};
+      line-height: 150%;
 
       outline: none;
       resize: vertical;
@@ -198,6 +205,7 @@ const StyledWrapper = styled.form`
       @media (min-width: 768px) {
         height: 200px;
         min-height: 150px;
+        line-height: 170%;
       }
 
       @media (min-width: 1366px) {
@@ -207,6 +215,7 @@ const StyledWrapper = styled.form`
       @media (min-width: 2560px) {
         font-size: ${({ theme }) => theme.fontSize.S};
         margin-top: 8px;
+        padding: 15px;
       }
     }
   }
