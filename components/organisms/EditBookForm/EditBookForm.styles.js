@@ -50,12 +50,14 @@ const StyledWrapper = styled.form`
       }
     }
 
-    .book-cover-container {
+    .change-cover-button {
       position: relative;
       width: 200px;
       margin-top: 20px;
       aspect-ratio: 1 / 1.42;
       z-index: 1;
+      border: none;
+      border-radius: ${({ theme }) => theme.borderRadius};
 
       @media (min-width: 768px) {
         width: 250px;
@@ -72,7 +74,24 @@ const StyledWrapper = styled.form`
         height: 378px;
       }
 
+      input {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        opacity: 0;
+        cursor: pointer;
+
+        &.disabled {
+          cursor: auto;
+        }
+      }
+
       img {
+        z-index: 1;
         border-radius: ${({ theme }) => theme.borderRadius};
       }
     }

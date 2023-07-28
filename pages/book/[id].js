@@ -1,7 +1,5 @@
 import Logo from 'components/atoms/Logo/Logo';
 import Image from 'next/image';
-import bookCover from 'images/book_cover.webp';
-import profileImage from 'images/profile.svg';
 import Button from 'components/atoms/Button/Button';
 import { useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
