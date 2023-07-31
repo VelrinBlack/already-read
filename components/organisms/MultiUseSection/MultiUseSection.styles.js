@@ -105,10 +105,8 @@ const StyledWrapper = styled.section`
       border-radius: 100%;
 
       @media (min-width: 2560px) {
-        width: 170px;
-        height: 170px;
-
-        padding: 5px;
+        width: 160px;
+        height: 160px;
       }
 
       .image-container {
@@ -131,7 +129,7 @@ const StyledWrapper = styled.section`
       color: ${({ theme }) => theme.color.darkGrey};
 
       @media (min-width: 2560px) {
-        margin-top: 20px;
+        margin-top: 30px;
         font-size: ${({ theme }) => theme.fontSize.L};
       }
     }

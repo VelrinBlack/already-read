@@ -18,10 +18,11 @@ const MultiUseSection = () => {
           <div className='container'>
             <div className='image-shadow'>
               <div className='image-container'>
+                <Image src={profileIcon} layout='fill' alt='placeholder profile icon' />
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profileImage/${user.email}`}
                   layout='fill'
-                  alt='profile image'
+                  alt=''
                 />
               </div>
             </div>
