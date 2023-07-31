@@ -85,7 +85,7 @@ const StyledWrapper = styled.form`
         opacity: 0;
         cursor: pointer;
 
-        &.disabled {
+        &:disabled {
           cursor: auto;
         }
       }
@@ -146,6 +146,10 @@ const StyledWrapper = styled.form`
       border: 2px solid ${({ theme }) => theme.color.yellow};
       color: ${({ theme }) => theme.color.white};
 
+      &:disabled {
+        opacity: 1;
+      }
+
       @media (min-width: 768px) {
         text-align: start;
         padding: 12px;
@@ -154,6 +158,16 @@ const StyledWrapper = styled.form`
       @media (min-width: 2560px) {
         margin: 8px 0 18px 0;
         padding: 15px;
+      }
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      &[type='number'] {
+        -moz-appearance: textfield;
       }
     }
 
@@ -167,17 +181,51 @@ const StyledWrapper = styled.form`
       .pair-container {
         flex: 1;
 
-        @media (min-width: 1366px) {
-          #condition {
-            margin-bottom: 0;
-          }
-        }
-
         &:first-child {
           margin-right: 15px;
 
           @media (min-width: 1366px) {
             margin-right: 0;
+          }
+        }
+
+        select {
+          display: block;
+          width: 100%;
+          height: 45px;
+          margin-top: 5px;
+
+          background-color: ${({ theme }) => theme.color.darkGrey};
+          border: 2px solid ${({ theme }) => theme.color.yellow};
+          border-radius: ${({ theme }) => theme.borderRadius};
+
+          text-align-last: center;
+          font-size: ${({ theme }) => theme.fontSize.XS};
+          font-family: ${({ theme }) => theme.fontFamily.primary};
+          color: ${({ theme }) => theme.color.white};
+
+          outline: none;
+
+          -webkit-appearance: none;
+          -moz-appearance: none;
+
+          &::-ms-expand {
+            display: none;
+          }
+
+          &:disabled {
+            opacity: 1;
+          }
+
+          @media (min-width: 768px) {
+            text-align-last: start;
+            padding: 12px;
+          }
+
+          @media (min-width: 2560px) {
+            height: 55px;
+            font-size: ${({ theme }) => theme.fontSize.S};
+            padding: 15px;
           }
         }
       }
@@ -201,6 +249,10 @@ const StyledWrapper = styled.form`
 
       outline: none;
       resize: vertical;
+
+      &:disabled {
+        opacity: 1;
+      }
 
       @media (min-width: 768px) {
         height: 200px;

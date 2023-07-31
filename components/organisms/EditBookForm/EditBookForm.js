@@ -75,7 +75,7 @@ const EditBookForm = () => {
         <button className='change-cover-button' type='button'>
           <input
             type='file'
-            className={`file-input ${coverLoading && 'disabled'}`}
+            className='file-input'
             disabled={coverLoading}
             onChange={(e) => {
               if (e.target.files.length) setBookCover(e.target.files[0]);
@@ -125,17 +125,23 @@ const EditBookForm = () => {
                 disabled={loading}
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
+                type='number'
               />
             </div>
 
             <div className='pair-container'>
               <label htmlFor='condition'>Condition:</label>
-              <Input
+
+              <select
                 id='condition'
                 disabled={loading}
                 value={condition}
                 onChange={(e) => setCondition(e.target.value)}
-              />
+              >
+                <option value=''></option>
+                <option value='New'>New</option>
+                <option value='Used'>Used</option>
+              </select>
             </div>
           </div>
         </div>
