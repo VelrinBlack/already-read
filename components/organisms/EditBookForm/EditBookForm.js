@@ -27,6 +27,10 @@ const EditBookForm = () => {
 
   const { user } = useContext(UserContext);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   useEffect(() => {
     if (bookID) {
       axios
@@ -70,7 +74,7 @@ const EditBookForm = () => {
   }, [coverImageName, router]);
 
   return (
-    <StyledWrapper>
+    <StyledWrapper onSubmit={handleSubmit}>
       <div className='background-container'>
         <button className='change-cover-button' type='button'>
           <input
@@ -158,12 +162,22 @@ const EditBookForm = () => {
       </div>
 
       <div className='buttons-container'>
-        <Button content='Exit' borderColor='blue' textColor='white' />
+        <Button
+          content='Exit'
+          borderColor='blue'
+          textColor='white'
+          type='button'
+          onClick={() => {
+            router.push('/myaccount');
+          }}
+        />
         <Button
           content='Save changes'
           borderColor='blue'
           backgroundColor='blue'
           textColor='white'
+          type='submit'
+          disabled={coverLoading}
         />
       </div>
     </StyledWrapper>

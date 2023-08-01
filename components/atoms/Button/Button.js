@@ -17,6 +17,10 @@ const StyledWrapper = styled.button`
 
   cursor: pointer;
 
+  &:disabled {
+    cursor: auto;
+  }
+
   @media (min-width: 2560px) {
     height: 55px;
     font-size: ${({ theme }) => theme.fontSize.S};
