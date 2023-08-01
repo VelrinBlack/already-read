@@ -7,6 +7,7 @@ import axios from 'axios';
 import UserContext from 'UserContext';
 import StyledWrapper from 'styles/pages/book/[id].styles';
 import strings from 'strings.json';
+import profileIcon from 'images/profile.svg';
 
 const Book = () => {
   const [imageName, setImageName] = useState('');
@@ -166,10 +167,11 @@ const Book = () => {
       <div className='second-background'>
         <div className='contact-info'>
           <div className='profile-image-container'>
+            <Image src={profileIcon} layout='fill' alt='placeholder profile icon' />
             {user && (
               <Image
                 src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profileImage/${user.email}`}
-                alt='profile image'
+                alt=''
                 layout='fill'
               />
             )}
@@ -188,10 +190,11 @@ const Book = () => {
           <p className='email'>{sellerEmail}</p>
         </div>
         <div className='profile-image-container'>
+          <Image src={profileIcon} layout='fill' alt='placeholder profile icon' />
           {user && (
             <Image
               src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profileImage/${user.email}`}
-              alt='profile image'
+              alt=''
               layout='fill'
             />
           )}
