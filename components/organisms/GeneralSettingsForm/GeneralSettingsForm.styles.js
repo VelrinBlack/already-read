@@ -155,6 +155,10 @@ const StyledWrapper = styled.form`
     &#email {
       margin-bottom: 50px;
     }
+
+    &#new-password {
+      margin-bottom: 100px;
+    }
   }
 
   .button-container {
