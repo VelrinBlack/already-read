@@ -14,6 +14,9 @@ const EditBookForm = () => {
 
   const [loading, setLoading] = useState(true);
   const [coverLoading, setCoverLoading] = useState(true);
+  const [exists, setExists] = useState(null);
+  const [error, setError] = useState(null);
+  const [updatedSuccessfully, setUpdatedSuccessfully] = useState(false);
 
   const [title, setTitle] = useState('');
   const [ISBN, setISBN] = useState('');
@@ -29,6 +32,65 @@ const EditBookForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!user) {
+      router.push('/');
+    }
+
+    if (exists) {
+      // update existing book
+      if (!bookCover || !title || !ISBN || !price || !condition || !description) {
+        return setError(strings.formError.PARAMETER_MISSING);
+      }
+
+      if (isNaN(Number(price))) {
+        return setError(strings.formError.INVALID_PRICE);
+      }
+
+      if (description.length < 200) {
+        return setError(strings.formError.TOO_SHORT_DESCRIPTION);
+      }
+
+      if (description.length > 1500) {
+        return setError(strings.formError.TOO_LONG_DESCRIPTION);
+      }
+
+      const formData = new FormData();
+      formData.append('bookCover', bookCover);
+      formData.append('title', title);
+      formData.append('ISBN', ISBN);
+      formData.append('price', price);
+      formData.append('condition', condition);
+      formData.append('description', description);
+
+      axios
+        .patch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/book/update`, formData, {
+          headers: {
+            Authorization: user.token,
+            'content-type': 'multipart/form-data',
+          },
+        })
+        .then((res) => {
+          if (res.data.message === strings.apiResponseMessage.UPDATED_SUCCESSFULLY) {
+            setUpdatedSuccessfully(true);
+
+            setTimeout(() => {
+              setUpdatedSuccessfully(false);
+            }, 5000);
+          }
+        })
+        .catch((err) => {
+          if (err.response?.data.message === strings.apiResponseMessage.UNSUPPORTED_FILE_TYPE) {
+            setError(strings.formError.UNSUPPORTED_IMAGE_FORMAT);
+          } else if (err.response?.data.message === strings.apiResponseMessage.INVALID_ISBN) {
+            setError(strings.formError.INVALID_ISBN);
+          } else {
+            setError(strings.formError.SOMETHING_WENT_WRONG);
+          }
+        });
+    } else {
+      // create a new book
+    }
   };
 
   useEffect(() => {
@@ -47,6 +109,7 @@ const EditBookForm = () => {
         })
         .catch((err) => {
           if (err.response?.data.message === strings.apiResponseMessage.NOT_FOUND) {
+            setExists(false);
             setLoading(false);
             setCoverLoading(false);
           } else {
@@ -64,6 +127,7 @@ const EditBookForm = () => {
         responseType: 'blob',
       })
         .then((res) => {
+          setExists(true);
           setBookCover(res.data);
           setCoverLoading(false);
         })

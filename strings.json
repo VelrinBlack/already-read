@@ -3,7 +3,13 @@
     "PARAMETER_MISSING": "Please fill in all fields",
     "INVALID_EMAIL": "Please enter valid email address",
     "INVALID_NAME": "Please enter valid name",
-    "TOO_SHORT_PASSWORD": "Please enter longer password"
+    "TOO_SHORT_PASSWORD": "Please enter longer password",
+    "INVALID_PRICE": "Please enter valid price",
+    "TOO_SHORT_DESCRIPTION": "Description must contain at least 200 characters",
+    "TOO_LONG_DESCRIPTION": "Description must contain at most 1500 characters",
+    "SOMETHING_WENT_WRONG": "Something went wrong",
+    "INVALID_ISBN": "Please enter a valid ISBN number",
+    "UNSUPPORTED_IMAGE_FORMAT": "The image format is not supported"
   },
   "apiResponseMessage": {
     "INVALID_PARAMETERS": "Invalid parameters",
@@ -18,7 +24,11 @@
     "REMOVED_SUCCESSFULLY": "Removed successfully",
     "BOOK_IS_FAVOURITE": "Book is favourite",
     "BOOK_IS_NOT_FAVOURITE": "Book is not favourite",
-    "UNSUPPORTED_FILE_TYPE": "Unsupported file type"
+    "UNSUPPORTED_FILE_TYPE": "Unsupported file type",
+    "PRICE_IS_NAN": "Price is NaN",
+    "INVALID_ISBN": "Invalid ISBN",
+    "INVALID_CONDITION": "Invalid condition",
+    "INVALID_DESCRIPTION_LENGTH": "Invalid description length"
   },
   "myAccountSection": {
     "GENERAL": "General",
