@@ -225,6 +225,18 @@ const EditBookForm = () => {
         </div>
       </div>
 
+      {error && (
+        <div className='error'>
+          <span>{error}</span>
+        </div>
+      )}
+
+      {updatedSuccessfully && (
+        <div className='success'>
+          <span>Updated successfully</span>
+        </div>
+      )}
+
       <div className='buttons-container'>
         <Button
           content='Exit'

@@ -272,12 +272,61 @@ const StyledWrapper = styled.form`
     }
   }
 
-  .buttons-container {
+  .error,
+  .success {
+    min-height: 45px;
+    margin: 20px 30px 0;
+    padding: 12px 20px;
+
     display: flex;
-    padding: 45px 30px 20px 30px;
+    justify-content: center;
+    align-items: center;
+
+    background-image: linear-gradient(to left, #ff0000, #ed0000, #da0000, #c90000, #b70000);
+    background-size: 200% 200%;
+    border-radius: ${({ theme }) => theme.borderRadius};
+
+    color: ${({ theme }) => theme.color.white};
+    animation: backgroundMovement 1s infinite alternate;
+
+    @keyframes backgroundMovement {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: 100% 100%;
+      }
+    }
 
     @media (min-width: 768px) {
-      padding: 45px 0 20px 0;
+      width: 600px;
+      margin: 20px auto 0;
+    }
+    @media (min-width: 2560px) {
+      min-height: 55px;
+    }
+
+    &.success {
+      background-image: linear-gradient(90deg, rgba(91, 125, 30, 1) 0%, rgba(122, 164, 27, 1) 100%);
+    }
+
+    span {
+      text-align: center;
+      font-family: ${({ theme }) => theme.fontFamily.primary};
+      font-size: ${({ theme }) => theme.fontSize.XS};
+
+      @media (min-width: 2560px) {
+        font-size: ${({ theme }) => theme.fontSize.S};
+      }
+    }
+  }
+
+  .buttons-container {
+    display: flex;
+    padding: 40px 30px 20px 30px;
+
+    @media (min-width: 768px) {
+      padding: 40px 0 20px 0;
       margin: 0 auto;
       width: 600px;
     }
