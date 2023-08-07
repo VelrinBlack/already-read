@@ -302,12 +302,26 @@ const StyledWrapper = styled.form`
       width: 600px;
       margin: 20px auto 0;
     }
+    @media (min-width: 1366px) {
+      &.mobile {
+        display: none;
+      }
+      &.desktop {
+        display: flex !important;
+      }
+    }
     @media (min-width: 2560px) {
       min-height: 55px;
     }
 
     &.success {
       background-image: linear-gradient(90deg, rgba(91, 125, 30, 1) 0%, rgba(122, 164, 27, 1) 100%);
+    }
+
+    &.desktop {
+      display: none;
+      width: 100%;
+      margin-top: 30px;
     }
 
     span {

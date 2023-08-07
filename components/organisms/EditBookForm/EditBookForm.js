@@ -226,13 +226,13 @@ const EditBookForm = () => {
       </div>
 
       {error && (
-        <div className='error'>
+        <div className='error mobile'>
           <span>{error}</span>
         </div>
       )}
 
       {updatedSuccessfully && (
-        <div className='success'>
+        <div className='success mobile'>
           <span>Updated successfully</span>
         </div>
       )}
@@ -256,6 +256,18 @@ const EditBookForm = () => {
           disabled={coverLoading}
         />
       </div>
+
+      {error && (
+        <div className='error desktop'>
+          <span>{error}</span>
+        </div>
+      )}
+
+      {updatedSuccessfully && (
+        <div className='success desktop'>
+          <span>Updated successfully</span>
+        </div>
+      )}
     </StyledWrapper>
   );
 };
