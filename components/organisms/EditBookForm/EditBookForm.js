@@ -41,22 +41,31 @@ const EditBookForm = () => {
       // update existing book
       if (!bookCover || !title || !ISBN || !price || !condition || !description) {
         return setError(strings.formError.PARAMETER_MISSING);
+      } else {
+        setError(null);
       }
 
       if (isNaN(Number(price))) {
         return setError(strings.formError.INVALID_PRICE);
+      } else {
+        setError(null);
       }
 
       if (description.length < 200) {
         return setError(strings.formError.TOO_SHORT_DESCRIPTION);
+      } else {
+        setError(null);
       }
 
       if (description.length > 1500) {
         return setError(strings.formError.TOO_LONG_DESCRIPTION);
+      } else {
+        setError(null);
       }
 
       const formData = new FormData();
       formData.append('bookCover', bookCover);
+      formData.append('bookID', bookID);
       formData.append('title', title);
       formData.append('ISBN', ISBN);
       formData.append('price', price);
@@ -92,6 +101,12 @@ const EditBookForm = () => {
       // create a new book
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      setUpdatedSuccessfully(false);
+    }
+  }, [error]);
 
   useEffect(() => {
     if (bookID) {
