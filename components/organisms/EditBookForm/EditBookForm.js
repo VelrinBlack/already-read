@@ -45,6 +45,18 @@ const EditBookForm = () => {
         setError(null);
       }
 
+      if (title.length < 2) {
+        return setError(strings.formError.TOO_SHORT_TITLE);
+      } else {
+        setError(null);
+      }
+
+      if (title.length > 50) {
+        return setError(strings.formError.TOO_LONG_TITLE);
+      } else {
+        setError(null);
+      }
+
       if (isNaN(Number(price))) {
         return setError(strings.formError.INVALID_PRICE);
       } else {

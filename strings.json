@@ -7,6 +7,8 @@
     "INVALID_PRICE": "Please enter valid price",
     "TOO_SHORT_DESCRIPTION": "Description must contain at least 200 characters",
     "TOO_LONG_DESCRIPTION": "Description must contain at most 1500 characters",
+    "TOO_SHORT_TITLE": "Title must contain at least 2 characters",
+    "TOO_LONG_TITLE": "Title must contain at most 50 characters",
     "SOMETHING_WENT_WRONG": "Something went wrong",
     "INVALID_ISBN": "Please enter a valid ISBN number",
     "UNSUPPORTED_IMAGE_FORMAT": "The image format is not supported"
@@ -28,7 +30,8 @@
     "PRICE_IS_NAN": "Price is NaN",
     "INVALID_ISBN": "Invalid ISBN",
     "INVALID_CONDITION": "Invalid condition",
-    "INVALID_DESCRIPTION_LENGTH": "Invalid description length"
+    "INVALID_DESCRIPTION_LENGTH": "Invalid description length",
+    "INVALID_TITLE_LENGTH": "Invalid title length"
   },
   "myAccountSection": {
     "GENERAL": "General",
