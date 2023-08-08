@@ -69,7 +69,7 @@ const EditBookForm = () => {
         setError(null);
       }
 
-      if (description.length > 1500) {
+      if (description.length > 900) {
         return setError(strings.formError.TOO_LONG_DESCRIPTION);
       } else {
         setError(null);
