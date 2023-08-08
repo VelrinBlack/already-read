@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
 
   @media (min-width: 1366px) {
     display: grid;
-    grid-template-columns: 800px 1fr;
+    grid-template-columns: 900px 1fr;
     grid-template-rows: 1fr 150px;
     height: 100%;
     padding: 0;
@@ -25,7 +25,7 @@ const StyledWrapper = styled.div`
   }
 
   @media (min-width: 1920px) {
-    grid-template-columns: 1200px 1fr;
+    grid-template-columns: 1000px 1fr;
   }
 
   @media (min-width: 2560px) {
@@ -76,16 +76,11 @@ const StyledWrapper = styled.div`
     bottom: 100px;
 
     width: 100%;
-    height: 250px;
 
     display: flex;
     justify-content: center;
 
     background-color: ${({ theme }) => theme.color.yellow};
-
-    @media (min-width: 768px) {
-      height: 300px;
-    }
 
     @media (min-width: 1366px) {
       grid-row: 1 / 2;
@@ -93,7 +88,6 @@ const StyledWrapper = styled.div`
       align-self: self-start;
       bottom: 0;
       margin-top: 103px;
-      height: 350px;
 
       border-top-right-radius: ${({ theme }) => theme.borderRadius};
       border-bottom-right-radius: ${({ theme }) => theme.borderRadius};
@@ -101,23 +95,22 @@ const StyledWrapper = styled.div`
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
-      padding: 75px 50px 0 425px;
+      padding: 75px 50px 50px 425px;
     }
 
     @media (min-width: 1920px) {
-      height: 400px;
-      padding: 75px 50px 0 575px;
+      padding: 75px 50px 50px 575px;
     }
 
     @media (min-width: 2560px) {
-      height: 550px;
-      padding: 115px 80px 0 795px;
+      padding: 115px 80px 80px 795px;
       margin-top: 131px;
     }
 
     .title {
-      width: 250px;
-      margin-top: 125px;
+      min-width: 250px;
+      max-width: 400px;
+      margin: 130px 100px 50px 100px;
       text-align: center;
       font-family: ${({ theme }) => theme.fontFamily.primary};
       font-size: ${({ theme }) => theme.fontSize.M};
@@ -125,7 +118,10 @@ const StyledWrapper = styled.div`
       font-weight: bold;
 
       @media (min-width: 768px) {
-        width: 400px;
+        min-width: initial;
+        max-width: initial;
+        width: 600px;
+        margin: 140px 0 60px 0;
         font-size: ${({ theme }) => theme.fontSize.L};
       }
 
@@ -332,6 +328,7 @@ const StyledWrapper = styled.div`
   .description {
     position: relative;
     bottom: 40px;
+    max-width: 500px;
     margin: 0 30px;
 
     color: ${({ theme }) => theme.color.white};
@@ -341,6 +338,7 @@ const StyledWrapper = styled.div`
 
     @media (min-width: 768px) {
       bottom: 20px;
+      max-width: 750px;
       margin: 0 80px;
       font-size: ${({ theme }) => theme.fontSize.XS};
     }
@@ -351,12 +349,12 @@ const StyledWrapper = styled.div`
       align-self: self-start;
       bottom: 0;
       margin: 153px 50px 0 50px;
+      max-width: 600px;
     }
 
     @media (min-width: 2560px) {
-      margin: 211px 80px 0 80px;
+      margin: 211px 0 0 80px;
       font-size: ${({ theme }) => theme.fontSize.S};
-      max-width: 1400px;
     }
   }
 
