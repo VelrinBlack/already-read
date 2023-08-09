@@ -17,6 +17,7 @@ const EditBookForm = () => {
   const [exists, setExists] = useState(null);
   const [error, setError] = useState(null);
   const [updatedSuccessfully, setUpdatedSuccessfully] = useState(false);
+  const [createdSuccessfully, setCreatedSuccessfully] = useState(false);
 
   const [title, setTitle] = useState('');
   const [ISBN, setISBN] = useState('');
@@ -37,53 +38,53 @@ const EditBookForm = () => {
       router.push('/');
     }
 
+    if (!bookCover || !title || !ISBN || !price || !condition || !description) {
+      return setError(strings.formError.PARAMETER_MISSING);
+    } else {
+      setError(null);
+    }
+
+    if (title.length < 2) {
+      return setError(strings.formError.TOO_SHORT_TITLE);
+    } else {
+      setError(null);
+    }
+
+    if (title.length > 50) {
+      return setError(strings.formError.TOO_LONG_TITLE);
+    } else {
+      setError(null);
+    }
+
+    if (isNaN(Number(price))) {
+      return setError(strings.formError.INVALID_PRICE);
+    } else {
+      setError(null);
+    }
+
+    if (description.length < 200) {
+      return setError(strings.formError.TOO_SHORT_DESCRIPTION);
+    } else {
+      setError(null);
+    }
+
+    if (description.length > 900) {
+      return setError(strings.formError.TOO_LONG_DESCRIPTION);
+    } else {
+      setError(null);
+    }
+
+    const formData = new FormData();
+    formData.append('bookCover', bookCover);
+    formData.append('bookID', bookID);
+    formData.append('title', title);
+    formData.append('ISBN', ISBN);
+    formData.append('price', price);
+    formData.append('condition', condition);
+    formData.append('description', description);
+
     if (exists) {
       // update existing book
-      if (!bookCover || !title || !ISBN || !price || !condition || !description) {
-        return setError(strings.formError.PARAMETER_MISSING);
-      } else {
-        setError(null);
-      }
-
-      if (title.length < 2) {
-        return setError(strings.formError.TOO_SHORT_TITLE);
-      } else {
-        setError(null);
-      }
-
-      if (title.length > 50) {
-        return setError(strings.formError.TOO_LONG_TITLE);
-      } else {
-        setError(null);
-      }
-
-      if (isNaN(Number(price))) {
-        return setError(strings.formError.INVALID_PRICE);
-      } else {
-        setError(null);
-      }
-
-      if (description.length < 200) {
-        return setError(strings.formError.TOO_SHORT_DESCRIPTION);
-      } else {
-        setError(null);
-      }
-
-      if (description.length > 900) {
-        return setError(strings.formError.TOO_LONG_DESCRIPTION);
-      } else {
-        setError(null);
-      }
-
-      const formData = new FormData();
-      formData.append('bookCover', bookCover);
-      formData.append('bookID', bookID);
-      formData.append('title', title);
-      formData.append('ISBN', ISBN);
-      formData.append('price', price);
-      formData.append('condition', condition);
-      formData.append('description', description);
-
       axios
         .patch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/book/update`, formData, {
           headers: {
@@ -111,14 +112,44 @@ const EditBookForm = () => {
         });
     } else {
       // create a new book
+      axios
+        .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/book/createOne`, formData, {
+          headers: {
+            Authorization: user.token,
+            'content-type': 'multipart/form-data',
+          },
+        })
+        .then((res) => {
+          if (res.data.message === strings.apiResponseMessage.CREATED_SUCCESSFULLY) {
+            setCreatedSuccessfully(true);
+
+            setTimeout(() => {
+              setCreatedSuccessfully(false);
+            }, 5000);
+          }
+        })
+        .catch((err) => {
+          if (err.response?.data.message === strings.apiResponseMessage.UNSUPPORTED_FILE_TYPE) {
+            setError(strings.formError.UNSUPPORTED_IMAGE_FORMAT);
+          } else if (err.response?.data.message === strings.apiResponseMessage.INVALID_ISBN) {
+            setError(strings.formError.INVALID_ISBN);
+          } else {
+            setError(strings.formError.SOMETHING_WENT_WRONG);
+          }
+        });
     }
   };
 
   useEffect(() => {
     if (error) {
       setUpdatedSuccessfully(false);
+      setCreatedSuccessfully(false);
     }
-  }, [error]);
+
+    if (updatedSuccessfully) {
+      setCreatedSuccessfully(false);
+    }
+  }, [error, updatedSuccessfully]);
 
   useEffect(() => {
     if (bookID) {
@@ -264,6 +295,12 @@ const EditBookForm = () => {
         </div>
       )}
 
+      {createdSuccessfully && (
+        <div className='success mobile'>
+          <span>Created successfully</span>
+        </div>
+      )}
+
       <div className='buttons-container'>
         <Button
           content='Exit'
@@ -293,6 +330,12 @@ const EditBookForm = () => {
       {updatedSuccessfully && (
         <div className='success desktop'>
           <span>Updated successfully</span>
+        </div>
+      )}
+
+      {createdSuccessfully && (
+        <div className='success desktop'>
+          <span>Created successfully</span>
         </div>
       )}
     </StyledWrapper>
