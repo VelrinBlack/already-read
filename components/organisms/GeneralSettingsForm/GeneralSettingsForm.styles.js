@@ -174,9 +174,18 @@ const StyledWrapper = styled.form`
       grid-column: 1 / 3;
       width: 100%;
       padding: 0;
-      margin-top: 30px;
+      margin: 30px 0 10px 0;
 
       box-shadow: none;
+    }
+  }
+
+  .log-out-button {
+    margin-bottom: 20px;
+
+    @media (min-width: 1366px) {
+      grid-column: 1 / 3;
+      margin: 0;
     }
   }
 
@@ -208,6 +217,7 @@ const StyledWrapper = styled.form`
 
     @media (min-width: 1366px) {
       grid-column: 1 / 3;
+      margin-bottom: 10px;
     }
     @media (min-width: 2560px) {
       height: 55px;

@@ -46,6 +46,16 @@ const GeneralSettingsForm = () => {
     setNewPassword('');
   };
 
+  const logOut = () => {
+    setUser(null);
+
+    localStorage.removeItem('user_name');
+    localStorage.removeItem('user_email');
+    localStorage.removeItem('user_token');
+
+    router.push('/');
+  };
+
   useEffect(() => {
     const userName = localStorage.getItem('user_name');
     const userEmail = localStorage.getItem('user_email');
@@ -207,6 +217,15 @@ const GeneralSettingsForm = () => {
           <span>Changes saved</span>
         </div>
       )}
+
+      <Button
+        type='button'
+        content='Log out'
+        textColor='white'
+        borderColor='blue'
+        className='log-out-button'
+        onClick={logOut}
+      />
     </StyledWrapper>
   );
 };
