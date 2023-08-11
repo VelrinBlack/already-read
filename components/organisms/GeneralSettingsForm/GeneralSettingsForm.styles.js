@@ -157,26 +157,13 @@ const StyledWrapper = styled.form`
     }
 
     &#new-password {
-      margin-bottom: 100px;
+      margin-bottom: 50px;
     }
   }
 
-  .button-container {
-    position: fixed;
-    bottom: 10px;
-    left: 0;
-
+  .save-button {
     width: 100%;
-    padding: 0 30px;
-
-    box-shadow: 0 0 10px 10px #31393c;
-
-    @media (min-width: 768px) {
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 0;
-      width: 500px;
-    }
+    margin-bottom: 20px;
 
     @media (min-width: 1366px) {
       position: relative;
@@ -197,7 +184,7 @@ const StyledWrapper = styled.form`
   .success {
     width: 100%;
     height: 45px;
-    margin-top: 20px;
+    margin-bottom: 20px;
 
     display: flex;
     justify-content: center;

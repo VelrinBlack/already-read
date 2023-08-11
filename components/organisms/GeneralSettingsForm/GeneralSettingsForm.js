@@ -82,6 +82,10 @@ const GeneralSettingsForm = () => {
     }
   }, [user, router]);
 
+  useEffect(() => {
+    window.scroll({ top: window.innerHeight });
+  }, [error, success]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -184,15 +188,13 @@ const GeneralSettingsForm = () => {
         id='new-password'
       />
 
-      <div className='button-container'>
-        <Button
-          type='submit'
-          content='Save changes'
-          textColor='white'
-          backgroundColor='blue'
-          className='save-button'
-        />
-      </div>
+      <Button
+        type='submit'
+        content='Save changes'
+        textColor='white'
+        backgroundColor='blue'
+        className='save-button'
+      />
 
       {error && (
         <div className='error'>
