@@ -57,9 +57,10 @@ const StyledWrapper = styled.div`
 
   .content-container {
     flex: 1;
+    overflow: hidden;
 
     .title {
-      margin: 15px 0 0 15px;
+      margin: 15px 15px 0 15px;
 
       font-size: ${({ theme }) => theme.fontSize.XS};
       font-family: ${({ theme }) => theme.fontFamily.primary};
@@ -67,8 +68,12 @@ const StyledWrapper = styled.div`
       color: ${({ theme }) => theme.color.white};
       cursor: pointer;
 
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
       @media (min-width: 768px) {
-        margin: 20px 0 0 20px;
+        margin: 20px 20px 0 20px;
         font-size: ${({ theme }) => theme.fontSize.S};
       }
 
@@ -103,22 +108,22 @@ const StyledWrapper = styled.div`
 
       display: grid;
       grid-template-rows: 23px;
-      grid-template-columns: 38px 1fr 23px;
+      grid-template-columns: 50px 1fr 23px;
 
       @media (min-width: 414px) {
         grid-template-rows: 27px;
-        grid-template-columns: 45px 1fr 27px;
+        grid-template-columns: 55px 1fr 27px;
       }
 
       @media (min-width: 768px) {
         margin: 20px;
         grid-template-rows: 30px;
-        grid-template-columns: 45px 1fr 120px;
+        grid-template-columns: 55px 1fr 120px;
       }
 
       @media (min-width: 1920px) {
         grid-template-rows: 35px;
-        grid-template-columns: 50px 1fr 150px;
+        grid-template-columns: 65px 1fr 150px;
       }
 
       .price-container {
