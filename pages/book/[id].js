@@ -11,11 +11,13 @@ import profileIcon from 'images/profile.svg';
 
 const Book = () => {
   const [imageName, setImageName] = useState('');
+  const [image, setImage] = useState(null);
   const [title, setTitle] = useState('Loading...');
   const [price, setPrice] = useState('...');
   const [condition, setCondition] = useState('...');
   const [sellerName, setSellerName] = useState('...');
   const [sellerEmail, setSellerEmail] = useState('Loading seller info...');
+  const [sellerProfileImage, setSellerProfileImage] = useState(null);
   const [isFavourite, setIsFavourite] = useState(null);
   const [description, setDescription] = useState('...');
 
@@ -64,6 +66,42 @@ const Book = () => {
     }
   }, [user, bookID, router]);
 
+  useEffect(() => {
+    if (sellerEmail != 'Loading seller info...') {
+      axios({
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profileImage/${sellerEmail}`,
+        method: 'GET',
+        responseType: 'blob',
+      })
+        .then((res) => {
+          setSellerProfileImage(res.data);
+        })
+        .catch((err) => {
+          if (err.response?.data.message === strings.apiResponseMessage.INVALID_CREDENTIALS) {
+            router.push('/');
+          }
+        });
+    }
+  }, [sellerEmail, router]);
+
+  useEffect(() => {
+    if (imageName) {
+      axios({
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/book/image/${imageName}`,
+        method: 'GET',
+        responseType: 'blob',
+      })
+        .then((res) => {
+          setImage(res.data);
+        })
+        .catch((err) => {
+          if (err.response?.data.message === strings.apiResponseMessage.INVALID_CREDENTIALS) {
+            router.push('/');
+          }
+        });
+    }
+  }, [imageName, router]);
+
   const removeFromFavourites = () => {
     setIsFavourite(null);
     axios
@@ -110,12 +148,7 @@ const Book = () => {
     <StyledWrapper>
       <Logo />
       <div className='book-cover-container'>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/book/image/${imageName}`}
-          alt='book cover'
-          layout='fill'
-          objectFit='cover'
-        />
+        {image && <Image src={URL.createObjectURL(image)} layout='fill' alt='profile image' />}
       </div>
       <div className='first-background'>
         <h2 className='title'>{title}</h2>
@@ -167,13 +200,14 @@ const Book = () => {
       <div className='second-background'>
         <div className='contact-info'>
           <div className='profile-image-container'>
-            <Image src={profileIcon} layout='fill' alt='placeholder profile icon' />
-            {user && (
+            {sellerProfileImage ? (
               <Image
-                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profileImage/${user.email}`}
-                alt=''
+                src={URL.createObjectURL(sellerProfileImage)}
                 layout='fill'
+                alt='profile image'
               />
+            ) : (
+              <Image src={profileIcon} layout='fill' alt='profile icon' />
             )}
           </div>
           <div className='text-container'>
@@ -190,13 +224,14 @@ const Book = () => {
           <p className='email'>{sellerEmail}</p>
         </div>
         <div className='profile-image-container'>
-          <Image src={profileIcon} layout='fill' alt='placeholder profile icon' />
-          {user && (
+          {sellerProfileImage ? (
             <Image
-              src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profileImage/${user.email}`}
-              alt=''
+              src={URL.createObjectURL(sellerProfileImage)}
               layout='fill'
+              alt='profile image'
             />
+          ) : (
+            <Image src={profileIcon} layout='fill' alt='profile icon' />
           )}
         </div>
       </div>

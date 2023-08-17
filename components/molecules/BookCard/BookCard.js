@@ -12,6 +12,7 @@ import strings from 'strings.json';
 const BookCard = ({ data: { title, price, ISBN, condition, imageName, _id } }) => {
   const [viewportWidth, setViewportWidth] = useState(0);
   const [isFavourite, setIsFavourite] = useState(null);
+  const [image, setImage] = useState(null);
 
   const { user } = useContext(UserContext);
   const router = useRouter();
@@ -47,6 +48,24 @@ const BookCard = ({ data: { title, price, ISBN, condition, imageName, _id } }) =
         });
     }
   }, [user, router, _id]);
+
+  useEffect(() => {
+    if (imageName) {
+      axios({
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/book/image/${imageName}`,
+        method: 'GET',
+        responseType: 'blob',
+      })
+        .then((res) => {
+          setImage(res.data);
+        })
+        .catch((err) => {
+          if (err.response?.data.message === strings.apiResponseMessage.INVALID_CREDENTIALS) {
+            router.push('/');
+          }
+        });
+    }
+  }, [imageName, router]);
 
   const removeFromFavourites = () => {
     setIsFavourite(null);
@@ -94,11 +113,7 @@ const BookCard = ({ data: { title, price, ISBN, condition, imageName, _id } }) =
     <StyledWrapper className='book-card'>
       <Link href={`/book/${_id}`} passHref>
         <div className='image-container'>
-          <Image
-            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/book/image/${imageName}`}
-            alt='cover image'
-            layout='fill'
-          />
+          {image && <Image src={URL.createObjectURL(image)} alt='cover image' layout='fill' />}
         </div>
       </Link>
       <div className='content-container'>
