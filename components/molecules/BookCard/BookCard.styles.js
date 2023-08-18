@@ -145,7 +145,8 @@ const StyledWrapper = styled.div`
         }
       }
 
-      .like-button {
+      .like-button,
+      .edit-button {
         grid-column: 3 / 4;
 
         display: flex;
@@ -156,18 +157,26 @@ const StyledWrapper = styled.div`
         border: none;
         border-radius: ${({ theme }) => theme.borderRadius};
 
-        .like-text {
+        cursor: pointer;
+
+        .like-text,
+        .edit-text {
           font-size: ${({ theme }) => theme.fontSize.XXXS};
           font-family: ${({ theme }) => theme.fontFamily.primary};
           font-weight: bold;
           color: ${({ theme }) => theme.color.white};
+
+          &.edit-text {
+            text-decoration: none;
+          }
 
           @media (min-width: 1920px) {
             font-size: ${({ theme }) => theme.fontSize.XXS};
           }
         }
 
-        .like-image-container {
+        .like-image-container,
+        .edit-image-container {
           position: relative;
 
           width: 15px;

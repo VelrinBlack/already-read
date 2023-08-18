@@ -106,7 +106,7 @@ const MyAccount = () => {
             ) : !myBooks.length ? (
               <p className='no-books'>Your list is empty</p>
             ) : (
-              <BookList books={myBooks} />
+              <BookList books={myBooks} editButtons />
             )}
           </>
         ) : activeSection === MESSAGES ? (

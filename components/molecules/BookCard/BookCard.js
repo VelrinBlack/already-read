@@ -8,8 +8,9 @@ import Link from 'next/link';
 import UserContext from 'UserContext';
 import axios from 'axios';
 import strings from 'strings.json';
+import editImg from 'images/edit.svg';
 
-const BookCard = ({ data: { title, price, ISBN, condition, imageName, _id } }) => {
+const BookCard = ({ data: { title, price, ISBN, condition, imageName, _id }, editButton }) => {
   const [viewportWidth, setViewportWidth] = useState(0);
   const [isFavourite, setIsFavourite] = useState(null);
   const [image, setImage] = useState(null);
@@ -132,7 +133,21 @@ const BookCard = ({ data: { title, price, ISBN, condition, imageName, _id } }) =
           </div>
           {user && (
             <>
-              {isFavourite === null ? (
+              {editButton ? (
+                <button className='edit-button'>
+                  <Link href={`/editbook/${_id}`} passHref>
+                    {viewportWidth >= 768 ? (
+                      <a href='Edit book' className='edit-text'>
+                        Edit book
+                      </a>
+                    ) : (
+                      <div className='edit-image-container'>
+                        <Image src={editImg} alt='edit image' layout='fill' />
+                      </div>
+                    )}
+                  </Link>
+                </button>
+              ) : isFavourite === null ? (
                 <button className='like-button'>
                   {viewportWidth >= 768 ? (
                     <p className='like-text'>Loading...</p>
