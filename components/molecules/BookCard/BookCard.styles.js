@@ -147,11 +147,8 @@ const StyledWrapper = styled.div`
 
       .like-button,
       .edit-button {
+        position: relative;
         grid-column: 3 / 4;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
 
         background-color: ${({ theme }) => theme.color.blue};
         border: none;
@@ -177,10 +174,12 @@ const StyledWrapper = styled.div`
 
         .like-image-container,
         .edit-image-container {
-          position: relative;
+          position: absolute;
+          top: 5px;
+          left: 5px;
 
-          width: 15px;
-          height: 15px;
+          width: calc(100% - 10px);
+          height: calc(100% - 10px);
         }
       }
     }
