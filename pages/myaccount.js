@@ -14,6 +14,7 @@ import BookList from 'components/organisms/BookList/BookList';
 import axios from 'axios';
 import UserContext from 'UserContext';
 import { useRouter } from 'next/router';
+import Button from 'components/atoms/Button/Button';
 
 const MyAccount = () => {
   const { GENERAL, MY_BOOKS, MESSAGES, FAVOURITES } = strings.myAccountSection;
@@ -24,6 +25,9 @@ const MyAccount = () => {
   const [activeSection, setActiveSection] = useState(GENERAL);
   const [myBooks, setMyBooks] = useState(null);
   const [favouriteBooks, setFavouriteBooks] = useState(null);
+
+  const newBookID = (m = Math, d = Date, h = 16, s = (s) => m.floor(s).toString(h)) =>
+    s(d.now() / 1000) + ' '.repeat(h).replace(/./g, () => s(m.random() * h));
 
   useEffect(() => {
     switch (activeSection) {
@@ -106,7 +110,18 @@ const MyAccount = () => {
             ) : !myBooks.length ? (
               <p className='no-books'>Your list is empty</p>
             ) : (
-              <BookList books={myBooks} editButtons />
+              <>
+                <BookList books={myBooks} editButtons />
+                <Link href={`/editbook/${newBookID()}`} passHref>
+                  <Button
+                    type='button'
+                    content='Add new book'
+                    textColor='white'
+                    backgroundColor='blue'
+                    className='create-button'
+                  />
+                </Link>
+              </>
             )}
           </>
         ) : activeSection === MESSAGES ? (

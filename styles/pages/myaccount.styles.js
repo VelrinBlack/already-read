@@ -235,6 +235,28 @@ const StyledWrapper = styled.div`
         }
       }
     }
+
+    .create-button {
+      position: fixed;
+      bottom: 20px;
+
+      width: calc(100% - 60px);
+
+      box-shadow: 0 40px 20px 55px ${({ theme }) => theme.color.darkGrey};
+
+      @media (min-width: 768px) {
+        width: 500px;
+      }
+      @media (min-width: 1336px) {
+        bottom: 45px;
+      }
+      @media (min-width: 1366px) {
+        width: 740px;
+      }
+      @media (min-width: 2560px) {
+        bottom: 50px;
+      }
+    }
   }
 
   .desktop-navigation {
