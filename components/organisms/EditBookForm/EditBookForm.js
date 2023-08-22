@@ -121,6 +121,7 @@ const EditBookForm = () => {
         })
         .then((res) => {
           if (res.data.message === strings.apiResponseMessage.CREATED_SUCCESSFULLY) {
+            setExists(true);
             setCreatedSuccessfully(true);
 
             setTimeout(() => {
