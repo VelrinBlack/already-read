@@ -108,7 +108,18 @@ const MyAccount = () => {
             {myBooks === null ? (
               <p className='loading-books'>Loading...</p>
             ) : !myBooks.length ? (
-              <p className='no-books'>Your list is empty</p>
+              <>
+                <p className='no-books'>Your list is empty</p>
+                <Link href={`/editbook/${newBookID()}`} passHref>
+                  <Button
+                    type='button'
+                    content='Add new book'
+                    textColor='white'
+                    backgroundColor='blue'
+                    className='create-button'
+                  />
+                </Link>
+              </>
             ) : (
               <>
                 <BookList books={myBooks} editButtons />
