@@ -148,7 +148,14 @@ const Book = () => {
     <StyledWrapper>
       <Logo />
       <div className='book-cover-container'>
-        {image && <Image src={URL.createObjectURL(image)} layout='fill' alt='profile image' />}
+        {image && (
+          <Image
+            src={URL.createObjectURL(image)}
+            layout='fill'
+            alt='profile image'
+            objectFit='cover'
+          />
+        )}
       </div>
       <div className='first-background'>
         <h2 className='title'>{title}</h2>
